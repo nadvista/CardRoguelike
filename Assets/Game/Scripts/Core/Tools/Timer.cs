@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace Core.Tools

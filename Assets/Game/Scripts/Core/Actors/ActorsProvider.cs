@@ -1,6 +1,5 @@
 ﻿using Core.Tools;
 using System;
-using Zenject.SpaceFighter;
 
 namespace Core.Actors
 {

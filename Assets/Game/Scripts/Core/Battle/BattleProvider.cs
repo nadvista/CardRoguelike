@@ -4,10 +4,7 @@ using Core.Desk;
 using Core.Params;
 using Core.Tools;
 using System;
-using System.Security.Cryptography;
 using UnityEngine;
-using Zenject;
-using Zenject.SpaceFighter;
 
 namespace Core.Battle
 {
@@ -18,7 +15,6 @@ namespace Core.Battle
 
         private Timer _gameTimer;
         private ScoreCounter _scoreCounter;
-        private Coroutine _waitDelayForBattleStart;
 
         public event Action<Actor, Actor, CardsDesk> OnBattleStart;
         public event Action<BattleResult> OnBattleEnd;
