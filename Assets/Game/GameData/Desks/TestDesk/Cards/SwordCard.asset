@@ -30,3 +30,5 @@ MonoBehaviour:
       type: {class: HitEnemyAction, ns: Core.Cards.Actions, asm: CoreAssembly}
       data:
         damage: 10
+        bonusAttackParamName: Strength
+        bonusDefenceParamName: Defence

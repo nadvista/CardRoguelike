@@ -12,10 +12,6 @@ namespace Core.Actors
         public Actor CurrentPlayer { get; private set; }
         public Actor CurrentEnemy { get; private set; }
 
-        public event Action OnManaLeft;
-        public event Action OnEnemyDead;
-        public event Action<Actor> PlayerChange;
-        public event Action<Actor> EnemyChange;
         public ActorsProvider(ActorsDatabase database)
         {
             _database = database;
@@ -40,34 +36,11 @@ namespace Core.Actors
 
         private void OnPlayerChange(Actor player)
         {
-            if (CurrentPlayer != null)
-            {
-                CurrentPlayer.OnDead -= OnPlayerManaLeft;
-            }
             CurrentPlayer = player;
-            CurrentPlayer.OnDead += OnPlayerManaLeft;
-
-            PlayerChange?.Invoke(CurrentPlayer);
         }
         private void OnEnemyChange(Actor enemy)
         {
-            if (CurrentEnemy != null)
-            {
-                CurrentEnemy.OnDead -= OnEnemyHealthLeft;
-            }
             CurrentEnemy = enemy;
-            CurrentEnemy.OnDead += OnEnemyHealthLeft;
-
-            EnemyChange?.Invoke(CurrentEnemy);
-        }
-
-        private void OnPlayerManaLeft()
-        {
-            OnManaLeft?.Invoke();
-        }
-        private void OnEnemyHealthLeft()
-        {
-            OnEnemyDead?.Invoke();
         }
     }
 }

@@ -10,10 +10,17 @@ namespace Core.Cards.Actions
     {
         [SerializeField]
         private float damage;
+
+        [SerializeField]
+        private string bonusAttackParamName;
+
+        [SerializeField]
+        private string bonusDefenceParamName;
+
         public override void DoAction(Actor player, Actor target, float timeBonus = 1)
         {
-            var strength = player.GetParams("Strength");
-            var defense = target.GetParams("Defence");
+            var strength = player.GetParams(bonusAttackParamName);
+            var defense = target.GetParams(bonusDefenceParamName);
             var scaledDamage = damage * timeBonus;
 
             if (strength != null && strength.Count > 0)

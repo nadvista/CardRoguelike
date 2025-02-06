@@ -37,6 +37,6 @@ MonoBehaviour:
       maxValue: 100
     <AllParams>k__BackingField:
     - <ParamName>k__BackingField: Defence
-      baseValue: 8
+      baseValue: 20
       minValue: 0
-      maxValue: 10
+      maxValue: 20

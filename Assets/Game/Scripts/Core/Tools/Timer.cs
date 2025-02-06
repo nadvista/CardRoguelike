@@ -38,7 +38,16 @@ namespace Core.Tools
             OnStop?.Invoke(result);
             return result;
         }
+        public Coroutine StartWait(float seconds, Action callback)
+        {
+            return StartCoroutine(WaitSecondsCoroutine(seconds, callback));
+        }
 
+        private IEnumerator WaitSecondsCoroutine(float seconds, Action callback)
+        {
+            yield return new WaitForSeconds(seconds);
+            callback?.Invoke();
+        }
         private IEnumerator TimerCoroutine()
         {
             var wait = new WaitForEndOfFrame();
