@@ -1,62 +1,74 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Core.Tools
 {
-    public class Timer : MonoBehaviour
+    public class Timer : ITickable
     {
-        public float CurrentTime { get; private set; }
-        public bool IsWorking { get; private set; }
+        public float CurrentTimeSeconds { get; private set; }
+        public bool IsWorking => IsStarted && !IsPaused;
+        public bool IsPaused { get; private set; }
+        public bool IsStarted { get; private set; } 
 
-        private Coroutine _timerCoroutine;
-        private float _maxTime;
+        private float _waitTime;
 
-        public event Action OnStart;
-        public event Action<float> OnStop;
+        public event Action OnTimerStart;
+        public event Action OnTimerStop;
+        public event Action OnTimerPause;
+        public event Action OnTimerResume;
+        public event Action OnTick;
 
-        public void StartTimer(float maxTime = float.MaxValue)
+        public void Start(float waitTime = float.MaxValue)
         {
-            StopTimer();
-            _maxTime = maxTime;
-            IsWorking = true;
-            _timerCoroutine = StartCoroutine(TimerCoroutine());
-            OnStart?.Invoke();
+            _waitTime = waitTime;
+            IsPaused = false;
+            IsStarted = true;
+
+            CurrentTimeSeconds = 0;
+
+            OnTimerStart?.Invoke();
         }
 
-        public float StopTimer()
+        public void Stop()
         {
-            if (!IsWorking)
-                return 0;
+            IsStarted = false;
+            IsPaused = false;
 
-            if (_timerCoroutine != null)
-                StopCoroutine(_timerCoroutine);
-            var result = CurrentTime;
-            CurrentTime = 0;
-            IsWorking = false;
-
-            OnStop?.Invoke(result);
-            return result;
-        }
-        public Coroutine StartWait(float seconds, Action callback)
-        {
-            return StartCoroutine(WaitSecondsCoroutine(seconds, callback));
+            OnTimerStop?.Invoke();
         }
 
-        private IEnumerator WaitSecondsCoroutine(float seconds, Action callback)
+        public void Pause()
         {
-            yield return new WaitForSeconds(seconds);
-            callback?.Invoke();
+            if (!IsStarted)
+                return;
+
+            IsPaused = true;
+
+            OnTimerPause?.Invoke();
         }
-        private IEnumerator TimerCoroutine()
+
+        public void Resume()
         {
-            var wait = new WaitForEndOfFrame();
-            while (IsWorking && CurrentTime < _maxTime)
-            {
-                yield return wait;
-                CurrentTime += Time.deltaTime;
-            }
-            StopTimer();
+            if(!IsStarted || !IsPaused) 
+                return;
+
+            IsPaused = false;
+
+            OnTimerResume?.Invoke();
+        }
+
+        public void Tick()
+        {
+            if(!IsWorking) 
+                return;
+
+            CurrentTimeSeconds += Time.deltaTime;
+            OnTick?.Invoke();
+
+            if(CurrentTimeSeconds >= _waitTime)
+                Stop();
         }
     }
 }

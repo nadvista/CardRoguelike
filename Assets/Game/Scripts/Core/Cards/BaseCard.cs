@@ -18,10 +18,10 @@ namespace Core.Cards
         [field: SerializeField]
         public Param ManaCost { get; set; }
 
-        [field: SerializeReference]
-        public List<CardAction> Actions { get; set; }
-
         [field: SerializeField]
         public float PlayDelay { get; set; } = 1f;
+
+        [field: SerializeReference]
+        public List<CardAction> Actions { get; set; }
     }
 }

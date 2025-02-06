@@ -1,12 +1,12 @@
 ﻿using Core.Tools;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Core.Params
 {
-    public abstract class Modifier
+    public abstract class Modifier : IDisposable
     {
         private static List<Modifier> _modifiers = new List<Modifier>();
 
@@ -19,6 +19,11 @@ namespace Core.Params
         {
             Duration = duration;
             Initialize();
+        }
+
+        public void Dispose()
+        {
+            GlobalStepsManager.OnNewStep -= SubtractDuration;
         }
 
         private void Initialize()

@@ -1,4 +1,6 @@
-﻿using Core.Tools;
+﻿using Core.Battle;
+using Core.ScoreCounting;
+using Core.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,18 +12,18 @@ namespace Ui.ScoreCounting
         [SerializeField]
         private Image fillImage;
         private ScoreCounter _scoreCounter;
-        private Timer _timer;
+        private IBattleProvider _battle;
 
         [Inject]
-        private void Construct(ScoreCounter counter, Timer timer)
+        private void Construct(ScoreCounter counter, IBattleProvider battle)
         {
             _scoreCounter = counter;
-            _timer = timer;
+            _battle = battle;
         }
 
         private void Update()
         {
-            var time = _timer.CurrentTime;
+            var time = _battle.TimeFromLastStep;
             var fillPc = Mathf.Max(0, _scoreCounter.BonusTime - time) / _scoreCounter.BonusTime;
             fillImage.fillAmount = fillPc;
         }

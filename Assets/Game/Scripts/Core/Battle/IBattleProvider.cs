@@ -19,6 +19,8 @@ namespace Core.Battle
         public GameEnemy CurrentEnemy { get; }
         public CardsDesk CurrentCardsDesk { get; }
 
+        public float TimeFromLastStep { get; }
+
         public Param PlayerMana { get; }
         public Param EnemyHeahth { get; }
 

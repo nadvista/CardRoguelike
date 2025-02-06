@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Core.Params
 {
     [Serializable]
-    public class Param
+    public class Param : IDisposable
     {
         [field: SerializeField]
         public string ParamName { get; private set; }
@@ -67,15 +67,26 @@ namespace Core.Params
             modifier.OnModifierLate -= OnModifierLate;
             OnValueChange?.Invoke();
         }
+        public void Reset()
+        {
+            RemoveEventsListeners();
+            Modifiers?.Clear();
+            OnValueChange?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            RemoveEventsListeners();
+        }
+
+        private void RemoveEventsListeners()
+        {
+            foreach(var modifier in Modifiers)
+                modifier.OnModifierLate -= OnModifierLate;
+        }
         private void OnModifierLate(Modifier modifier)
         {
             RemoveModifier(modifier);
-        }
-
-        public void Reset()
-        {
-            Modifiers?.Clear();
-            OnValueChange?.Invoke();
         }
     }
 }

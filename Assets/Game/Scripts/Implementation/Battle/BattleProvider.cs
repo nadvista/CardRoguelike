@@ -5,6 +5,7 @@ using Core.Battle;
 using Core.Cards;
 using Core.Desk;
 using Core.Params;
+using Core.ScoreCounting;
 using Core.Tools;
 using Implementation.Params.Modifiers;
 using System;
@@ -12,7 +13,7 @@ using UnityEngine;
 
 namespace Implementation.Battle
 {
-    public class BattleProvider : IBattleProvider
+    public class BattleProvider : IBattleProvider, IDisposable
     {
         private IDesksProvider _deskProvider;
         private IPlayerProvider _playerProvider;
@@ -29,6 +30,8 @@ namespace Implementation.Battle
         public GamePlayer CurrentPlayer { get; private set; }
         public GameEnemy CurrentEnemy { get; private set; }
         public CardsDesk CurrentCardsDesk { get; private set; }
+
+        public float TimeFromLastStep => _gameTimer.CurrentTimeSeconds;
 
         public Param PlayerMana => CurrentPlayer.HealthParam;
 
@@ -61,7 +64,7 @@ namespace Implementation.Battle
                 OnPlayCard?.Invoke(PlayCardResult.Unsuccess);
                 return;
             }
-            var time = _gameTimer.CurrentTime;
+            var time = _gameTimer.CurrentTimeSeconds;
             var timeBonus = _scoreCounter.CalculateScore(time);
 
             PlayerMana.ApplyModifier(new SubtractModifier(card.ManaCost.ActualValue, int.MaxValue));
@@ -70,7 +73,7 @@ namespace Implementation.Battle
                 action.DoAction(CurrentPlayer, CurrentEnemy, timeBonus);
 
             GlobalStepsManager.NewStep();
-            _gameTimer.StartTimer();
+            _gameTimer.Start();
             OnPlayCard?.Invoke(PlayCardResult.Success);
         }
         public void PlayBattleCard(int deskCardIndex)
@@ -96,10 +99,15 @@ namespace Implementation.Battle
             ResolveBattleProps();
             ResetBattleProps();
             SubscribeBattlePropsEvents();
-            _gameTimer.StartTimer();
+            _gameTimer.Start();
 
             IsBattleStarted = true;
             OnBattleStart?.Invoke(CurrentPlayer, CurrentEnemy, CurrentCardsDesk);
+        }
+
+        public void Dispose()
+        {
+            StopBattle();
         }
 
         private void UnsubscribeBattlePropsEvents()
@@ -130,8 +138,8 @@ namespace Implementation.Battle
         
         private void StopBattle(BattleResult result)
         {
-            _gameTimer.StopTimer();
-
+            _gameTimer.Stop();
+            UnsubscribeBattlePropsEvents();
             IsBattleStarted = false;
             OnBattleEnd?.Invoke(result);
         }

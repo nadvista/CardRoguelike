@@ -2,6 +2,7 @@
 using Core.Actors.Players;
 using Core.Battle;
 using Core.Desk;
+using Core.ScoreCounting;
 using Core.Tools;
 using Implementation.Actors;
 using Implementation.Battle;
@@ -30,14 +31,15 @@ namespace Implementation.Installers
             Container.Bind<ActorsDatabase>().FromInstance(actors).AsSingle();
             Container.Bind<DesksDatabase>().FromInstance(desks).AsSingle();
 
-            Container.Bind<Timer>().FromInstance(timer).AsSingle();
-            Container.Bind<ScoreCounter>().FromInstance(scoreCounter).AsSingle();
+            Container.Bind<Timer>().FromInstance(timer).AsTransient();
 
-            Container.Bind<IPlayerProvider>().To<RandomPlayerProvider>().AsSingle();
-            Container.Bind<IEnemyProvider>().To<ContiniousEnemiesProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScoreCounter>().FromInstance(scoreCounter).AsSingle();
 
-            Container.Bind<IDesksProvider>().To<RandomDeskProvider>().AsSingle();
-            Container.Bind<IBattleProvider>().To<BattleProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RandomPlayerProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ContiniousEnemiesProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RandomDeskProvider>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<BattleProvider>().AsSingle();
         }
     }
 }
