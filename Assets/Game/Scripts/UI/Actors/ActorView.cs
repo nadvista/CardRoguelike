@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Ui.Actors
 {
-    public class ActorView : UIContainerElement<Actor>
+    public class ActorView : UIContainerElement<GameActor>
     {
         [SerializeField]
         private TextMeshProUGUI nameLabel;
@@ -19,7 +19,7 @@ namespace Ui.Actors
         [SerializeField]
         private ParamsContainerView paramsContainerView;
 
-        protected override void OnSetup(Actor data)
+        protected override void OnSetup(GameActor data)
         {
             nameLabel.text = data.Data.Name;
             imagePreview.sprite = data.Data.Image;

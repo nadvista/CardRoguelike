@@ -7,6 +7,6 @@ namespace Core.Cards.Actions
     public abstract class CardAction
     {
         public CardAction() { }
-        public abstract void DoAction(Actor player, Actor target, float timeBonus = 1);
+        public abstract void DoAction(GameActor player, GameActor target, float timeBonus = 1);
     }
 }

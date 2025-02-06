@@ -22,10 +22,10 @@ namespace Ui.Cards
         [SerializeField]
         private Image cardPreviewImage;
 
-        private BattleProvider _battle;
+        private IBattleProvider _battle;
 
         [Inject]
-        private void Construct(BattleProvider battle)
+        private void Construct(IBattleProvider battle)
         {
             _battle = battle;
         }

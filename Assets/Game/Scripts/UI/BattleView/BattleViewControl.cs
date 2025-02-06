@@ -24,10 +24,10 @@ namespace Ui.BattleView
         [SerializeField]
         private ScoreCounterView scoreCounterView;
 
-        private BattleProvider _battle;
+        private IBattleProvider _battle;
 
         [Inject]
-        private void Construct(BattleProvider battle)
+        private void Construct(IBattleProvider battle)
         {
             _battle = battle;
         }
@@ -41,16 +41,11 @@ namespace Ui.BattleView
             _battle.StartBattle();
         }
 
-        private void OnBattleStart(Actor actor1, Actor actor2, CardsDesk desk)
+        private void OnBattleStart(GameActor actor1, GameActor actor2, CardsDesk desk)
         {
             playerView.Setup(actor1);
             enemyView.Setup(actor2);
             deskView.Fill(desk.Cards);
-        }
-
-        private void OnDestroy()
-        {
-            
         }
     }
 }
