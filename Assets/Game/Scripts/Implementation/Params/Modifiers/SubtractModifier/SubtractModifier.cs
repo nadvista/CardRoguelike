@@ -1,4 +1,5 @@
 ﻿using Core.Params;
+using Core.Steps;
 using UnityEngine;
 
 namespace Implementation.Params.Modifiers
@@ -8,7 +9,11 @@ namespace Implementation.Params.Modifiers
         [SerializeField]
         private float subtractValue;
 
-        public SubtractModifier(float value, int duration) : base(duration)
+        public SubtractModifier(IStepCounter stepCounter) : base(stepCounter)
+        {
+        }
+
+        public void SetupValue(float value)
         {
             subtractValue = value;
         }

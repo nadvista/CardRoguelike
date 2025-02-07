@@ -18,17 +18,18 @@ MonoBehaviour:
   <Id>k__BackingField: Sword
   <ManaCost>k__BackingField:
     <ParamName>k__BackingField: ManaCost
-    baseValue: 10
+    baseValue: 5
     minValue: 0
     maxValue: 50
+  <PlayDelay>k__BackingField: 1
   <Actions>k__BackingField:
-  - rid: 3242848043433721912
+  - rid: 3242848065976533048
   references:
     version: 2
     RefIds:
-    - rid: 3242848043433721912
-      type: {class: HitEnemyAction, ns: Core.Cards.Actions, asm: CoreAssembly}
+    - rid: 3242848065976533048
+      type: {class: HitEnemyAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
       data:
-        damage: 10
-        bonusAttackParamName: Strength
+        damage: 5
+        bonusAttackParamName: Attack
         bonusDefenceParamName: Defence

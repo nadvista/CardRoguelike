@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,12 +8,20 @@ namespace Core.Tools
 {
     public class Timer : ITickable
     {
+        private static List<Timer> _all = new List<Timer>();
+        public Guid Id;
         public float CurrentTimeSeconds { get; private set; }
         public bool IsWorking => IsStarted && !IsPaused;
         public bool IsPaused { get; private set; }
         public bool IsStarted { get; private set; } 
 
         private float _waitTime;
+
+        public Timer()
+        {
+            Id = Guid.NewGuid();
+            _all.Add(this);
+        }
 
         public event Action OnTimerStart;
         public event Action OnTimerStop;

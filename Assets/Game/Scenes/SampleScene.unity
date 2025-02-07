@@ -335,7 +335,6 @@ Transform:
   m_Children:
   - {fileID: 44320821}
   - {fileID: 2108143592}
-  - {fileID: 1283946173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556405121
@@ -577,50 +576,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1283946172
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1283946173}
-  - component: {fileID: 1283946174}
-  m_Layer: 0
-  m_Name: Timer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1283946173
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283946172}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 361658393}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1283946174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283946172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46458a424de02a41b4b65a8584aeb39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1299350617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1137,7 +1092,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actors: {fileID: 11400000, guid: d5a5683d3be85a7449ba327d75ac68ce, type: 2}
   desks: {fileID: 11400000, guid: 33391c5b28f77264e85b28d82cf15293, type: 2}
-  timer: {fileID: 0}
   scoreCounter:
     <BonusTime>k__BackingField: 3
     <BonusScale>k__BackingField: 3
@@ -1299,9 +1253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b8300e8699a404eab715e0d68ef1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actors: {fileID: 11400000, guid: d5a5683d3be85a7449ba327d75ac68ce, type: 2}
-  desks: {fileID: 11400000, guid: 33391c5b28f77264e85b28d82cf15293, type: 2}
-  timer: {fileID: 1283946174}
+  actors: {fileID: 11400000, guid: 38d43fc422aed1a4f8faf38e8ef00b15, type: 2}
+  desks: {fileID: 11400000, guid: 4bb2afff523d7b149b39190d4aac6e14, type: 2}
   scoreCounter:
     <BonusTime>k__BackingField: 5
     <BonusScale>k__BackingField: 3

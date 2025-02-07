@@ -6,6 +6,7 @@ using Core.Cards;
 using Core.Desk;
 using Core.Params;
 using Core.ScoreCounting;
+using Core.Steps;
 using Core.Tools;
 using Implementation.Params.Modifiers;
 using System;
@@ -18,6 +19,9 @@ namespace Implementation.Battle
         private IDesksProvider _deskProvider;
         private IPlayerProvider _playerProvider;
         private IEnemyProvider _enemyProvider;
+        private GlobalStepsCounter _stepCounter;
+
+        private ModifiersPool _modifiersPool;
 
         private Timer _gameTimer;
         private ScoreCounter _scoreCounter;
@@ -37,13 +41,15 @@ namespace Implementation.Battle
 
         public Param EnemyHeahth => CurrentEnemy.HealthParam;
 
-        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, Timer gameTimer, ScoreCounter scoreCounter)
+        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, GlobalStepsCounter stepCounter, Timer gameTimer, ScoreCounter scoreCounter, ModifiersPool modifiersPool)
         {
             _deskProvider = deskProvider;
             _playerProvider = player;
             _enemyProvider = enemyProvider;
             _gameTimer = gameTimer;
             _scoreCounter = scoreCounter;
+            _modifiersPool = modifiersPool;
+            _stepCounter = stepCounter;
         }
 
         public void PlayBattleCard(BaseCard card)
@@ -67,12 +73,14 @@ namespace Implementation.Battle
             var time = _gameTimer.CurrentTimeSeconds;
             var timeBonus = _scoreCounter.CalculateScore(time);
 
-            PlayerMana.ApplyModifier(new SubtractModifier(card.ManaCost.ActualValue, int.MaxValue));
+            var subtractMod = _modifiersPool.GetSubtractModifier(int.MaxValue, card.ManaCost.ActualValue);
+
+            PlayerMana.ApplyModifier(subtractMod);
 
             foreach (var action in card.Actions)
                 action.DoAction(CurrentPlayer, CurrentEnemy, timeBonus);
 
-            GlobalStepsManager.NewStep();
+            _stepCounter.NewStep();
             _gameTimer.Start();
             OnPlayCard?.Invoke(PlayCardResult.Success);
         }
