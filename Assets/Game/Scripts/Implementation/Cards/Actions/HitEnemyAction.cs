@@ -42,7 +42,6 @@ namespace Implementation.Cards.Actions
 
             var subtract = ModifiersPool.Instance.GetSubtractModifier(int.MaxValue, scaledDamage);
             target.HealthParam.ApplyModifier(subtract);
-            Debug.Log($"Hit {scaledDamage}");
         }
     }
 }
