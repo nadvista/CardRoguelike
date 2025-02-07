@@ -25,6 +25,7 @@ namespace Implementation.Battle
 
         private GameTimer _gameTimer;
         private ScoreCounter _scoreCounter;
+        private ICardsCooldownProvider _cardsCooldownProvider;
 
         public event Action<GameActor, GameActor, CardsDesk> OnBattleStart;
         public event Action<BattleResult> OnBattleEnd;
@@ -41,7 +42,12 @@ namespace Implementation.Battle
 
         public Param EnemyHeahth => CurrentEnemy.HealthParam;
 
-        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, GlobalStepsCounter stepCounter, TimersPool gameTimersPool, ScoreCounter scoreCounter, ModifiersPool modifiersPool)
+        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, 
+            GlobalStepsCounter stepCounter, 
+            TimersPool gameTimersPool, 
+            ScoreCounter scoreCounter, 
+            ModifiersPool modifiersPool, 
+            ICardsCooldownProvider cooldownProvider)
         {
             _deskProvider = deskProvider;
             _playerProvider = player;
@@ -50,6 +56,7 @@ namespace Implementation.Battle
             _scoreCounter = scoreCounter;
             _modifiersPool = modifiersPool;
             _stepCounter = stepCounter;
+            _cardsCooldownProvider = cooldownProvider;
         }
 
         public void PlayBattleCard(BaseCard card)
@@ -82,6 +89,8 @@ namespace Implementation.Battle
 
             _stepCounter.NewStep();
             _gameTimer.Start();
+            _cardsCooldownProvider.BlockCard(card);
+
             OnPlayCard?.Invoke(PlayCardResult.Success);
         }
         public void PlayBattleCard(int deskCardIndex)
@@ -154,7 +163,7 @@ namespace Implementation.Battle
 
         private bool CanPlayCard(BaseCard card)
         {
-            return PlayerMana.ActualValue >= card.ManaCost.ActualValue;
+            return PlayerMana.ActualValue >= card.ManaCost.ActualValue && !_cardsCooldownProvider.IsCardBlocked(card);
         }
 
         private void OnEnemyDead()

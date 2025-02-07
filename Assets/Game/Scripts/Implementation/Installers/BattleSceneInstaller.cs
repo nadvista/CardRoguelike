@@ -1,13 +1,9 @@
-﻿using Core.Actors.Enemies;
-using Core.Actors.Players;
-using Core.Battle;
-using Core.Desk;
-using Core.ScoreCounting;
+﻿using Core.ScoreCounting;
 using Core.Steps;
-using Core.Tools.Pool;
 using Core.Tools.Timer;
 using Implementation.Actors;
 using Implementation.Battle;
+using Implementation.Cards;
 using Implementation.Desks;
 using Implementation.Params.Modifiers;
 using UnityEngine;
@@ -59,6 +55,7 @@ namespace Implementation.Installers
             Container.BindInterfacesAndSelfTo<ContiniousEnemiesProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<RandomDeskProvider>().AsSingle();
 
+            Container.BindInterfacesAndSelfTo<CardsCooldownProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleProvider>().AsSingle();
         }
     }

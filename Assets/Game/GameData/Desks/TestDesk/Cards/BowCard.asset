@@ -21,7 +21,7 @@ MonoBehaviour:
     baseValue: 10
     minValue: 0
     maxValue: 50
-  <PlayDelay>k__BackingField: 1
+  <PlayDelay>k__BackingField: 2
   <Actions>k__BackingField:
   - rid: 3242848065976533047
   references:
