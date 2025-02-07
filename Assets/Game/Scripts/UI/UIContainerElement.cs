@@ -4,10 +4,10 @@ namespace Ui
 {
     public abstract class UIContainerElement<DataType> : MonoBehaviour
     {
-        protected DataType _data { get; private set; }
+        public DataType Data { get; private set; }
         public void Setup(DataType data)
         {
-            _data = data;
+            Data = data;
             OnSetup(data);
         }
         public void Deactivate()

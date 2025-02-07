@@ -22,19 +22,19 @@ namespace Ui.Params
 
         protected override void OnActivate()
         {
-            _data.OnValueChange += OnParamChange;
+            Data.OnValueChange += OnParamChange;
             OnParamChange();
         }
 
         protected override void OnDeactivate()
         {
-            if(_data != null)
-                _data.OnValueChange -= OnParamChange;
+            if(Data != null)
+                Data.OnValueChange -= OnParamChange;
         }
 
         private void OnParamChange()
         {
-            _valueLabel.text = _data.ActualValue.ToString("F2");
+            _valueLabel.text = Data.ActualValue.ToString("F2");
         }
     }
 }
