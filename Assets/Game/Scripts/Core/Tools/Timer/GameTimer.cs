@@ -1,17 +1,22 @@
-﻿using System;
+﻿using Core.Tools.Pool;
+using System;
 using UnityEngine;
 using Zenject;
 
-namespace Core.Tools
+namespace Core.Tools.Timer
 {
-    public class Timer : ITickable
+
+    public class GameTimer : ITickable, IPoolElement
     {
         public float CurrentTimeSeconds { get; private set; }
         public bool IsWorking => IsStarted && !IsPaused;
         public bool IsPaused { get; private set; }
-        public bool IsStarted { get; private set; } 
+        public bool IsStarted { get; private set; }
+
+        public bool IsInactive { get; private set; }
 
         private float _waitTime;
+        private Action _onStopCallback;
 
         public event Action OnTimerStart;
         public event Action OnTimerStop;
@@ -19,14 +24,14 @@ namespace Core.Tools
         public event Action OnTimerResume;
         public event Action OnTick;
 
-        public void Start(float waitTime = float.MaxValue)
+        public void Start(float waitTime = float.MaxValue, Action onStopCallback = null)
         {
             _waitTime = waitTime;
             IsPaused = false;
             IsStarted = true;
 
             CurrentTimeSeconds = 0;
-
+            _onStopCallback = onStopCallback;
             OnTimerStart?.Invoke();
         }
 
@@ -50,7 +55,7 @@ namespace Core.Tools
 
         public void Resume()
         {
-            if(!IsStarted || !IsPaused) 
+            if (!IsStarted || !IsPaused)
                 return;
 
             IsPaused = false;
@@ -60,14 +65,33 @@ namespace Core.Tools
 
         public void Tick()
         {
-            if(!IsWorking) 
+            if (!IsWorking)
                 return;
 
             CurrentTimeSeconds += Time.deltaTime;
             OnTick?.Invoke();
 
-            if(CurrentTimeSeconds >= _waitTime)
+            if (CurrentTimeSeconds >= _waitTime)
+            {
+                _onStopCallback?.Invoke();
                 Stop();
+            }
+        }
+
+        public void Release()
+        {
+            Stop();
+            IsInactive = true;
+        }
+
+        public void OnReturnToPool()
+        {
+            Stop();
+        }
+
+        public void OnTakeFromPool()
+        {
+            IsInactive = false;
         }
     }
 }

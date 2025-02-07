@@ -4,13 +4,13 @@ namespace Core.Tools.Pool
 {
     public class ObjectsPool<PoolElementType> where PoolElementType : IPoolElement
     {
-        private List<PoolElementType> _allElements = new List<PoolElementType>();
-        private List<PoolElementType> _workingElements = new List<PoolElementType>();
-        private Stack<PoolElementType> _inactiveElements = new Stack<PoolElementType>();
+        protected List<PoolElementType> _allElements { get; private set; } = new List<PoolElementType>();
+        protected List<PoolElementType> _workingElements { get; private set; } = new List<PoolElementType>();
+        protected Stack<PoolElementType> _inactiveElements { get; private set; } = new Stack<PoolElementType>();
 
-        private List<PoolElementType> _toremove = new List<PoolElementType>();
+        protected List<PoolElementType> _toremove { get; private set; } = new List<PoolElementType>();
 
-        private IPoolFabric<PoolElementType> _fabric;
+        protected IPoolFabric<PoolElementType> _fabric { get; private set; }
 
         public ObjectsPool(IPoolFabric<PoolElementType> fabric)
         {

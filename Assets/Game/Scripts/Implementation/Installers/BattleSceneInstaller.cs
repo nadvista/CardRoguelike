@@ -4,8 +4,8 @@ using Core.Battle;
 using Core.Desk;
 using Core.ScoreCounting;
 using Core.Steps;
-using Core.Tools;
 using Core.Tools.Pool;
+using Core.Tools.Timer;
 using Implementation.Actors;
 using Implementation.Battle;
 using Implementation.Desks;
@@ -30,20 +30,20 @@ namespace Implementation.Installers
         {
             InstallDatabases();
 
-            Container.BindInterfacesAndSelfTo<Timer>().AsSingle();
-
             Container.BindInterfacesAndSelfTo<ScoreCounter>().FromInstance(scoreCounter).AsSingle();
             Container.BindInterfacesAndSelfTo<GlobalStepsCounter>().AsSingle();
 
-            InstallProviders();
-
             InstallModifierFabrics();
+
+            InstallProviders();
         }
 
         private void InstallModifierFabrics()
         {
             Container.BindInterfacesAndSelfTo<SubtractModifierFabric>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TimersFabric>().AsSingle();
 
+            Container.BindInterfacesAndSelfTo<TimersPool>().AsSingle();
             Container.Bind<ModifiersPool>().AsSingle();
         }
 

@@ -7,7 +7,7 @@ using Core.Desk;
 using Core.Params;
 using Core.ScoreCounting;
 using Core.Steps;
-using Core.Tools;
+using Core.Tools.Timer;
 using Implementation.Params.Modifiers;
 using System;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace Implementation.Battle
 
         private ModifiersPool _modifiersPool;
 
-        private Timer _gameTimer;
+        private GameTimer _gameTimer;
         private ScoreCounter _scoreCounter;
 
         public event Action<GameActor, GameActor, CardsDesk> OnBattleStart;
@@ -41,12 +41,12 @@ namespace Implementation.Battle
 
         public Param EnemyHeahth => CurrentEnemy.HealthParam;
 
-        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, GlobalStepsCounter stepCounter, Timer gameTimer, ScoreCounter scoreCounter, ModifiersPool modifiersPool)
+        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, GlobalStepsCounter stepCounter, TimersPool gameTimersPool, ScoreCounter scoreCounter, ModifiersPool modifiersPool)
         {
             _deskProvider = deskProvider;
             _playerProvider = player;
             _enemyProvider = enemyProvider;
-            _gameTimer = gameTimer;
+            _gameTimer = gameTimersPool.Get();
             _scoreCounter = scoreCounter;
             _modifiersPool = modifiersPool;
             _stepCounter = stepCounter;
