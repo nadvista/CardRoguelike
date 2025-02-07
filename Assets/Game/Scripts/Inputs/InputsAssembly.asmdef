@@ -1,11 +1,9 @@
 {
-    "name": "UIAssembly",
+    "name": "InputsAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
         "GUID:8765b0b5d399c2d4383ad943a6f24eae",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:75895cd60d5c57740a39b45474edc60f"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
