@@ -29,7 +29,7 @@ namespace Implementation.Battle
 
         public event Action<GameActor, GameActor, CardsDesk> OnBattleStart;
         public event Action<BattleResult> OnBattleEnd;
-        public event Action<PlayCardResult> OnPlayCard;
+        public event Action<BaseCard, PlayCardResult> OnPlayCard;
 
         public bool IsBattleStarted { get; private set; }
         public GamePlayer CurrentPlayer { get; private set; }
@@ -63,18 +63,18 @@ namespace Implementation.Battle
         {
             if (!IsBattleStarted)
             {
-                OnPlayCard?.Invoke(PlayCardResult.Unsuccess);
+                OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
                 return;
             }
             if (!CurrentCardsDesk.Cards.Contains(card))
             {
                 Debug.LogError("it is impossible to play a card that is not in the deck");
-                OnPlayCard?.Invoke(PlayCardResult.Unsuccess);
+                OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
                 return;
             }
             if (!CanPlayCard(card))
             {
-                OnPlayCard?.Invoke(PlayCardResult.Unsuccess);
+                OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
                 return;
             }
             var time = _gameTimer.CurrentTimeSeconds;
@@ -91,11 +91,13 @@ namespace Implementation.Battle
             _gameTimer.Start();
             _cardsCooldownProvider.BlockCard(card);
 
-            OnPlayCard?.Invoke(PlayCardResult.Success);
+            OnPlayCard?.Invoke(card, PlayCardResult.Success);
         }
         public void PlayBattleCard(int deskCardIndex)
         {
             if (!IsBattleStarted)
+                return;
+            if (deskCardIndex >= CurrentCardsDesk.Cards.Count)
                 return;
 
             var card = CurrentCardsDesk.Cards[deskCardIndex];

@@ -12,7 +12,7 @@ namespace Core.Battle
     {
         public event Action<GameActor, GameActor, CardsDesk> OnBattleStart;
         public event Action<BattleResult> OnBattleEnd;
-        public event Action<PlayCardResult> OnPlayCard;
+        public event Action<BaseCard, PlayCardResult> OnPlayCard;
 
         public bool IsBattleStarted { get; }
         public GamePlayer CurrentPlayer { get; }

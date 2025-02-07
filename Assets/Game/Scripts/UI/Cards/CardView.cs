@@ -1,6 +1,8 @@
 ﻿using Core.Battle;
 using Core.Cards;
 using Core.Tools.Timer;
+using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +17,13 @@ namespace Ui.Cards
 
         [SerializeField] 
         private Image blockImage;
+
+        //вынести
+        [SerializeField]
+        private Image cantPlaySignalImage;
+        private Sequence _cantPlaySignalTween;
+        private bool _signalPlaying;
+        //
 
         [SerializeField]
         private TextMeshProUGUI cardNameLabel;
@@ -38,18 +47,54 @@ namespace Ui.Cards
         private void Awake()
         {
             blockImage.fillAmount = 0;
+            cantPlaySignalImage.gameObject.SetActive(false);
+
             _cooldownProvider.OnBlockCard += OnBlockAnyCard;
             _cooldownProvider.OnUnblockCard += OnUnblockAnyCard;
+            _battle.OnPlayCard += OnPlayAnyCardResultRecieved;
         }
+
         private void OnDestroy()
         {
             _cooldownProvider.OnBlockCard -= OnBlockAnyCard;
             _cooldownProvider.OnUnblockCard -= OnUnblockAnyCard;
+            _battle.OnPlayCard -= OnPlayAnyCardResultRecieved;
             if (_blockTimer != null)
             {
                 _blockTimer.OnTick -= OnBlockTimerTick;
             }
         }
+
+        //вынести
+        private void OnPlayAnyCardResultRecieved(BaseCard card, PlayCardResult result)
+        {
+            if (result == PlayCardResult.Success)
+                return;
+            if (card != _data || _data == null)
+                return;
+
+            if (_signalPlaying)
+                return;
+
+            _signalPlaying = true;
+            cantPlaySignalImage.gameObject.SetActive(true);
+            var stdColor = cantPlaySignalImage.color;
+            var colorTransparent = new Color(1, 1, 1, 0);
+            cantPlaySignalImage.color = colorTransparent;
+
+            _cantPlaySignalTween = DOTween.Sequence();
+            _cantPlaySignalTween.Append(cantPlaySignalImage.DOColor(stdColor, 0.2f));
+            _cantPlaySignalTween.Append(cantPlaySignalImage.DOColor(colorTransparent, 0.2f));
+            _cantPlaySignalTween.Append(cantPlaySignalImage.DOColor(stdColor, 0.2f));
+            _cantPlaySignalTween.Append(cantPlaySignalImage.DOColor(colorTransparent, 0.2f));
+
+            _cantPlaySignalTween.OnComplete(() => {
+                cantPlaySignalImage.gameObject.SetActive(false);
+                cantPlaySignalImage.color = stdColor;
+                _signalPlaying = false;
+            });
+        }
+        //
 
         private void OnBlockAnyCard(BaseCard card, GameTimer timer)
         {

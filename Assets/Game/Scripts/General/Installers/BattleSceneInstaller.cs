@@ -6,10 +6,12 @@ using Implementation.Battle;
 using Implementation.Cards;
 using Implementation.Desks;
 using Implementation.Params.Modifiers;
+using Inputs.Battle;
+using Inputs.SimpleHandlers;
 using UnityEngine;
 using Zenject;
 
-namespace Implementation.Installers
+namespace General.Installers
 {
     public class BattleSceneInstaller : MonoInstaller
     {
@@ -32,6 +34,8 @@ namespace Implementation.Installers
             InstallModifierFabrics();
 
             InstallProviders();
+
+            InstallInputs();
         }
 
         private void InstallModifierFabrics()
@@ -57,6 +61,12 @@ namespace Implementation.Installers
 
             Container.BindInterfacesAndSelfTo<CardsCooldownProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleProvider>().AsSingle();
+        }
+    
+        private void InstallInputs()
+        {
+            Container.BindInterfacesAndSelfTo<GameplaySimpleInputsHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InputsBattleController>().AsSingle();
         }
     }
 }
