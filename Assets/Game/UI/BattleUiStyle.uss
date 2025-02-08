@@ -1,0 +1,4 @@
+.cards_pair_container {
+    width: 233px;
+    height: 333px;
+}

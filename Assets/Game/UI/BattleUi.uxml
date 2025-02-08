@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="CardsUi" src="project://database/Assets/Game/UI/Card/CardsUi.uxml?fileID=9197481963319205126&amp;guid=cca39d54025eb21418d94a02c4a58b56&amp;type=3#CardsUi" />
+    <Style src="project://database/Assets/Game/UI/BattleUiStyle.uss?fileID=7433441132597879392&amp;guid=c52c6158f7ebfb041827d78a3fc7328e&amp;type=3#BattleUiStyle" />
+    <ui:VisualElement name="Desk" style="flex-grow: 1; background-color: rgb(75, 75, 75); align-items: flex-end; justify-content: center; flex-direction: row;">
+        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+    </ui:VisualElement>
+</ui:UXML>
