@@ -17,7 +17,7 @@ MonoBehaviour:
     CardName: Sword
   <Id>k__BackingField: Sword
   <ManaCost>k__BackingField:
-    <ParamName>k__BackingField: ManaCost
+    <Type>k__BackingField: 3
     baseValue: 5
     minValue: 0
     maxValue: 50
@@ -31,5 +31,5 @@ MonoBehaviour:
       type: {class: HitEnemyAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
       data:
         damage: 5
-        bonusAttackParamName: Attack
-        bonusDefenceParamName: Defence
+        bonusAttackParamName: 0
+        bonusDefenceParamName: 1

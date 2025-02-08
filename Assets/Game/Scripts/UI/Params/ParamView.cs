@@ -3,21 +3,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace Ui.Params
 {
     public class ParamView : UIContainerElement<Param>
     {
         [SerializeField]
-        private TextMeshProUGUI _paramNameLabel;
+        private Image _paramPreview;
 
         [SerializeField]
         private TextMeshProUGUI _valueLabel;
 
+        private ParamsPreviews _previews;
+
+        [Inject]
+        private void Construct(ParamsPreviews previews)
+        {
+            _previews = previews;
+        }
+
         protected override void OnSetup(Param data)
         {
-            _paramNameLabel.text = data.Type.ToString();
+            _paramPreview.sprite = _previews.GetPreview(data.Type);
         }
 
         protected override void OnActivate()

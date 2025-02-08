@@ -17,12 +17,12 @@ MonoBehaviour:
       <Image>k__BackingField: {fileID: 21300000, guid: a299adda8f341374fa96bc6f96af2cfc, type: 3}
       <Name>k__BackingField: "\u0420\u044B\u0446\u0430\u0440\u044C"
     <HealthParam>k__BackingField:
-      <ParamName>k__BackingField: Mana
+      <Type>k__BackingField: 2
       baseValue: 100
       minValue: 0
       maxValue: 100
     <AllParams>k__BackingField:
-    - <ParamName>k__BackingField: Attack
+    - <Type>k__BackingField: 0
       baseValue: 10
       minValue: 0
       maxValue: 50
@@ -31,12 +31,12 @@ MonoBehaviour:
       <Image>k__BackingField: {fileID: 21300000, guid: d4229849ee57da04faa71033d4dbfbe1, type: 3}
       <Name>k__BackingField: "\u042F\u0449\u0435\u0440"
     <HealthParam>k__BackingField:
-      <ParamName>k__BackingField: Health
+      <Type>k__BackingField: 2
       baseValue: 100
       minValue: 0
       maxValue: 100
     <AllParams>k__BackingField:
-    - <ParamName>k__BackingField: Defence
+    - <Type>k__BackingField: 1
       baseValue: 30
       minValue: 0
       maxValue: 50

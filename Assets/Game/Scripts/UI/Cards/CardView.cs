@@ -2,6 +2,7 @@
 using Core.Cards;
 using Core.Tools.Timer;
 using TMPro;
+using Ui.Params;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -23,7 +24,7 @@ namespace Ui.Cards
         private TextMeshProUGUI cardNameLabel;
 
         [SerializeField]
-        private TextMeshProUGUI cardCostLabel;
+        private ParamView cardCostParamView;
 
         [SerializeField]
         private Image cardPreviewImage;
@@ -87,7 +88,7 @@ namespace Ui.Cards
 
         private void OnCostChange()
         {
-            cardCostLabel.text = Data.ManaCost.ActualValue.ToString();
+            cardCostParamView.Setup(Data.ManaCost);
         }
     }
 }

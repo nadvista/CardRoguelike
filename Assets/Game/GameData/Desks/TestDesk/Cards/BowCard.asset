@@ -17,7 +17,7 @@ MonoBehaviour:
     CardName: Bow
   <Id>k__BackingField: Bow
   <ManaCost>k__BackingField:
-    <Type>k__BackingField: 0
+    <Type>k__BackingField: 3
     baseValue: 10
     minValue: 0
     maxValue: 50

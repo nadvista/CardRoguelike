@@ -8,6 +8,7 @@ using Implementation.Desks;
 using Implementation.Params.Modifiers;
 using Inputs.Battle;
 using Inputs.SimpleHandlers;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +25,9 @@ namespace General.Installers
         [SerializeField]
         private ScoreCounter scoreCounter;
 
+        [SerializeField]
+        private ParamsPreviews paramsPreview;
+
         public override void InstallBindings()
         {
             InstallDatabases();
@@ -36,6 +40,8 @@ namespace General.Installers
             InstallProviders();
 
             InstallInputs();
+
+            InstallUi();
         }
 
         private void InstallModifierFabrics()
@@ -67,6 +73,11 @@ namespace General.Installers
         {
             Container.BindInterfacesAndSelfTo<GameplaySimpleInputsHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<InputsBattleController>().AsSingle();
+        }
+
+        private void InstallUi()
+        {
+            Container.Bind<ParamsPreviews>().FromInstance(paramsPreview).AsSingle();
         }
     }
 }
