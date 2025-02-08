@@ -1,10 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="CardsUi" src="project://database/Assets/Game/UI/Card/CardsUi.uxml?fileID=9197481963319205126&amp;guid=cca39d54025eb21418d94a02c4a58b56&amp;type=3#CardsUi" />
     <Style src="project://database/Assets/Game/UI/BattleUiStyle.uss?fileID=7433441132597879392&amp;guid=c52c6158f7ebfb041827d78a3fc7328e&amp;type=3#BattleUiStyle" />
-    <ui:VisualElement name="Desk" style="flex-grow: 1; background-color: rgb(75, 75, 75); align-items: flex-end; justify-content: center; flex-direction: row;">
-        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
-        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
-        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
-        <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+    <ui:VisualElement tabindex="0" name="MonsterImage" style="flex-grow: 1; position: absolute; background-image: url(&apos;project://database/Assets/Game/Sprites/E_TEST.jpg?fileID=2800000&amp;guid=d4229849ee57da04faa71033d4dbfbe1&amp;type=3#E_TEST&apos;); width: 720px; height: 679px; align-self: center; justify-content: flex-start; top: 78px;" />
+    <ui:VisualElement name="BottomPan" style="flex-grow: 1; justify-content: flex-end; flex-direction: row; height: auto; max-height: 500px; align-self: flex-end; bottom: 0; position: absolute; left: 0; right: 0;">
+        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/P_TEST.jpg?fileID=2800000&amp;guid=a299adda8f341374fa96bc6f96af2cfc&amp;type=3#P_TEST&apos;); -unity-background-scale-mode: scale-to-fit;" />
+        <ui:VisualElement name="Desk" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: flex-end; justify-content: center; flex-direction: row; margin-bottom: 50px; min-height: auto; min-width: auto;">
+            <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+            <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+            <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+            <ui:Instance template="CardsUi" name="CardsPairContaiener" class="cards_pair_container" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

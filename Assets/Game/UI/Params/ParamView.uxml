@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="CardMana" style="flex-grow: 0; flex-direction: row; justify-content: center; align-items: center;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/blue_fire.png?fileID=2800000&amp;guid=3842bcb325a147749b230d48aa86c4ab&amp;type=3#blue_fire&apos;); -unity-background-scale-mode: scale-and-crop; width: 50px; height: 50px; min-width: 50px; min-height: 50px; max-width: 50px; max-height: 50px; -unity-slice-scale: -1.8px; -unity-slice-left: 10; -unity-slice-top: 10; -unity-slice-right: 10; -unity-slice-bottom: 10;" />
+        <ui:Label text="10" name="CardValue" style="font-size: 35px; -unity-text-align: upper-center; -unity-font-style: bold; min-width: auto; min-height: auto;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -23,11 +23,11 @@ MonoBehaviour:
     maxValue: 50
   <PlayDelay>k__BackingField: 2
   <Actions>k__BackingField:
-  - rid: 3242848065976533047
+  - rid: 3242848111473983990
   references:
     version: 2
     RefIds:
-    - rid: 3242848065976533047
+    - rid: 3242848111473983990
       type: {class: HitEnemyAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
       data:
         damage: 10

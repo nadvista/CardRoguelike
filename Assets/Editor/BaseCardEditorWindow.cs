@@ -6,7 +6,6 @@ using System;
 using System.Reflection;
 using Core;
 using Core.Cards;
-
 public class BaseCardEditorWindow : EditorWindow
 {
     // Список всех экземпляров BaseCard
