@@ -8,7 +8,7 @@ namespace Core.Params
     public class Param : IDisposable
     {
         [field: SerializeField]
-        public string ParamName { get; private set; }
+        public ParamType Type { get; private set; }
 
         [SerializeField]
         private float baseValue;
@@ -18,6 +18,8 @@ namespace Core.Params
 
         [SerializeField]
         private float maxValue;
+
+        private float _foreverAdditionValue = 0;
 
         public Param(float baseValue, float minValue, float maxValue)
         {
@@ -46,15 +48,21 @@ namespace Core.Params
                 var toRemoveMods = new List<Modifier>();
                 foreach (var modifier in Modifiers)
                 {
-                    result = modifier.Modify(result);
                     if(modifier.Duration <= 0)
                         toRemoveMods.Add(modifier);
+                    else
+                        result = modifier.Modify(result);
                 }
                 Modifiers.RemoveAll(e => toRemoveMods.Contains(e));
+                result += _foreverAdditionValue;
                 return Mathf.Clamp(result, minValue, maxValue);
             }
         }
-
+        public void AddForeverValue(float value)
+        {
+            _foreverAdditionValue += value;
+            OnValueChange?.Invoke();
+        }
         public void ApplyModifier(Modifier modifier)
         {
             Modifiers.Add(modifier);
@@ -70,6 +78,7 @@ namespace Core.Params
         public void Reset()
         {
             RemoveEventsListeners();
+            _foreverAdditionValue = 0f;
             Modifiers?.Clear();
             OnValueChange?.Invoke();
         }

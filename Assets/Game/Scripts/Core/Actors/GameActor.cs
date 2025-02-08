@@ -44,9 +44,9 @@ namespace Core.Actors
             HealthParam.OnValueChange -= OnHealthChange;
         }
 
-        public List<Param> GetParams(string name)
+        public List<Param> GetParams(ParamType paramType)
         {
-            return AllParams.Where(e => e.ParamName == name).ToList();
+            return AllParams.Where(e => e.Type == paramType).ToList();
         }
 
         protected virtual void OnInitialize() { }

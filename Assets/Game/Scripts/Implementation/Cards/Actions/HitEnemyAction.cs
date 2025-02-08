@@ -1,5 +1,6 @@
 ﻿using Core.Actors;
 using Core.Cards.Actions;
+using Core.Params;
 using Implementation.Params.Modifiers;
 using System;
 using UnityEngine;
@@ -13,10 +14,10 @@ namespace Implementation.Cards.Actions
         private float damage;
 
         [SerializeField]
-        private string bonusAttackParamName;
+        private ParamType bonusAttackParamName;
 
         [SerializeField]
-        private string bonusDefenceParamName;
+        private ParamType bonusDefenceParamName;
 
         public override void DoAction(GameActor player, GameActor target, float timeBonus = 1)
         {
@@ -40,8 +41,7 @@ namespace Implementation.Cards.Actions
                 }
             }
 
-            var subtract = ModifiersPool.Instance.GetSubtractModifier(int.MaxValue, scaledDamage);
-            target.HealthParam.ApplyModifier(subtract);
+            target.HealthParam.AddForeverValue(-scaledDamage);
         }
     }
 }

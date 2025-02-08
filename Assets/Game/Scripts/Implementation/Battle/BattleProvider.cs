@@ -80,9 +80,7 @@ namespace Implementation.Battle
             var time = _gameTimer.CurrentTimeSeconds;
             var timeBonus = _scoreCounter.CalculateScore(time);
 
-            var subtractMod = _modifiersPool.GetSubtractModifier(int.MaxValue, card.ManaCost.ActualValue);
-
-            PlayerMana.ApplyModifier(subtractMod);
+            PlayerMana.AddForeverValue(-card.ManaCost.ActualValue);
 
             foreach (var action in card.Actions)
                 action.DoAction(CurrentPlayer, CurrentEnemy, timeBonus);

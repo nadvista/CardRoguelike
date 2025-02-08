@@ -17,7 +17,7 @@ namespace Ui.Params
 
         protected override void OnSetup(Param data)
         {
-            _paramNameLabel.text = data.ParamName;
+            _paramNameLabel.text = data.Type.ToString();
         }
 
         protected override void OnActivate()
