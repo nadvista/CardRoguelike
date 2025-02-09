@@ -36,7 +36,7 @@ namespace Implementation.Battle
         public GameEnemy CurrentEnemy { get; private set; }
         public CardsDesk CurrentCardsDesk { get; private set; }
 
-        public float TimeFromLastStep => _gameTimer.CurrentTimeSeconds;
+        public float TimeFromLastStepSeconds => _gameTimer.CurrentTimeSeconds;
 
         public Param PlayerMana => CurrentPlayer.HealthParam;
 

@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9112dcfea483b4a429d16a420067edc4, type: 3}
   m_Name: Params
   m_EditorClassIdentifier: 
-  <ParamsPreviewData>k__BackingField: []
+  <ParamsPreviewData>k__BackingField:
+  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+    ParamType: 3
+  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+    ParamType: 2
+  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+    ParamType: 1
+  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+    ParamType: 0

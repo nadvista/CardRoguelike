@@ -3,6 +3,6 @@
     public interface IScoreCounter
     {
         public float CalculateScore(float time);
-        public float CalculateMaxBonus();
+        public float BonusTimeSeconds { get; }
     }
 }

@@ -26,7 +26,7 @@ namespace Implementation.Cards
 
         public void BlockCard(BaseCard card)
         {
-            var delay = card.PlayDelay;
+            var delay = card.CooldownSeconds;
             if (Mathf.Approximately(delay, 0))
                 return;
             var timer = _timersPool.Get();

@@ -1,9 +1,10 @@
+using Core.Inputs;
 using System;
 using UnityEngine.InputSystem;
 
 namespace Inputs.SimpleHandlers
 {
-    public class GameplaySimpleInputsHandler : IDisposable
+    public class GameplaySimpleInputsHandler : IInputsHandler
     {
         private GameControls _gameControls;
 

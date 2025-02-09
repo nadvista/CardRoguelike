@@ -7,7 +7,7 @@ namespace Core.ScoreCounting
     public class ScoreCounter : IScoreCounter
     {
         [field: SerializeField]
-        public float BonusTime { get; private set; }
+        public float BonusTimeSeconds { get; private set; }
 
         [field: SerializeField]
         public float BonusScale { get; private set; }
@@ -19,7 +19,7 @@ namespace Core.ScoreCounting
 
         public float CalculateScore(float time)
         {
-            var result = 1 + (1 - Mathf.Min(time, BonusTime) / BonusTime) * BonusScale;
+            var result = 1 + (1 - Mathf.Min(time, BonusTimeSeconds) / BonusTimeSeconds) * BonusScale;
             return result;
         }
     }
