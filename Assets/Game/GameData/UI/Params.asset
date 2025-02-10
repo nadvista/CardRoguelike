@@ -15,9 +15,9 @@ MonoBehaviour:
   <ParamsPreviewData>k__BackingField:
   - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
     ParamType: 3
-  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+  - Sprite: {fileID: 21300000, guid: 76a2b206c5669fc49a7f037d3fac6331, type: 3}
     ParamType: 2
-  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+  - Sprite: {fileID: 21300000, guid: 93f5f37c881ad8b4e91104733cd81b37, type: 3}
     ParamType: 1
-  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
+  - Sprite: {fileID: 21300000, guid: e5a0104f476c0044c8b4b17592570cad, type: 3}
     ParamType: 0

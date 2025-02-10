@@ -897,23 +897,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 233
       objectReference: {fileID: 0}
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 126.5
       objectReference: {fileID: 0}
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 5799671508197459544, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   actors: {fileID: 11400000, guid: 38d43fc422aed1a4f8faf38e8ef00b15, type: 2}
   desks: {fileID: 11400000, guid: 4bb2afff523d7b149b39190d4aac6e14, type: 2}
   scoreCounter:
-    <BonusTimeSeconds>k__BackingField: 0
+    <BonusTimeSeconds>k__BackingField: 5
     <BonusScale>k__BackingField: 3
   paramsPreview: {fileID: 11400000, guid: 567cd9833012ae249988fb2817baf2ea, type: 2}
 --- !u!114 &2108143594
@@ -1480,23 +1480,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1172486364118555535, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1172486364118555535, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1172486364118555535, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 233
       objectReference: {fileID: 0}
     - target: {fileID: 1172486364118555535, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 122.5
       objectReference: {fileID: 0}
     - target: {fileID: 1172486364118555535, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 3440469867263535452, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_Pivot.x

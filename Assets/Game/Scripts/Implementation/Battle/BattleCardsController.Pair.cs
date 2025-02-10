@@ -30,6 +30,10 @@ namespace Implementation.Battle
             public float StartSwitching(float switchingTime)
             {
                 var time = switchingTime;
+                var temp = Main;
+                Main = Secondary;
+                Secondary = temp;
+
                 if (IsSwitching) // если произошел перевыбор во время движения
                 {
                     var timeElapsed = _switchingTimer.CurrentTimeSeconds;
@@ -63,10 +67,6 @@ namespace Implementation.Battle
             {
                 if (_isStoppedManually)
                     return;
-
-                var temp = Main;
-                Main = Secondary;
-                Secondary = temp;
 
                 _lastStopTime = 0;
                 _stopsCount = 0;
