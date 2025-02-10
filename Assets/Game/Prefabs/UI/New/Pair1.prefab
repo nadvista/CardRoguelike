@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCardView: {fileID: 4015730542746158741}
   secondaryCardView: {fileID: 8487671124273023101}
+  totalSwitchingTime: 0.2
 --- !u!1001 &2581607153196700862
 PrefabInstance:
   m_ObjectHideFlags: 0

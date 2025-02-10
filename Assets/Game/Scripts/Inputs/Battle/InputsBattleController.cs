@@ -20,7 +20,8 @@ namespace Inputs.Battle
 
         private void OnSwitchPerformed(int obj)
         {
-            
+            var switchIndex = obj - 1;
+            _battleProvider.SwitchCardsPair(switchIndex);
         }
 
         private void OnPlayPerformed(int obj)

@@ -19,7 +19,6 @@ namespace Ui.Cards
         private CardView secondaryCardView;
 
         private Sequence _switchingSequence;
-        private const float TOTAL_SWITCHING_ANIMATION_TIME = 2f;
 
         private PairPosition _currentPosition = PairPosition.Normal;
 
@@ -31,9 +30,6 @@ namespace Ui.Cards
 
         private RectTransform _mainRect;
         private RectTransform _secondaryRect;
-
-        private float _lastStopTime;
-        private int _stopsCount;
 
         private void Awake()
         {
@@ -49,7 +45,7 @@ namespace Ui.Cards
 
         private void OnDestroy()
         {
-            throw new NotImplementedException("Реализовать уничножение твина");
+            _switchingSequence.Kill();
         }
 
         public void SetupPair(BaseCard main, BaseCard secondary)
@@ -58,22 +54,10 @@ namespace Ui.Cards
             secondaryCardView.Setup(secondary);
         }
 
-        public void Switch()
+        public void Switch(float time)
         {
-            var time = TOTAL_SWITCHING_ANIMATION_TIME;
-            if (_switchingSequence != null) // если произошел перевыбор во время движения
+            if (_switchingSequence != null)
             {
-                _stopsCount++;
-                if (_stopsCount % 2 == 0) // двигаемся в изначальную до перевыборов сторону
-                {
-                    _lastStopTime -= _switchingSequence.Elapsed();
-                    time -= _lastStopTime;
-                }
-                else
-                {
-                    _lastStopTime += _switchingSequence.Elapsed(); // двигаемся в сторону, из которой изначально уходили
-                    time = _lastStopTime;
-                }
                 _switchingSequence.Kill();
             }
 
@@ -111,8 +95,6 @@ namespace Ui.Cards
             _switchingSequence.Insert(0, _secondaryRect.DOSizeDelta(newSecondaryScale, time));
 
             _switchingSequence.OnComplete(() => {
-                _lastStopTime = 0;
-                _stopsCount = 0;
                 _switchingSequence = null;
             });
         }

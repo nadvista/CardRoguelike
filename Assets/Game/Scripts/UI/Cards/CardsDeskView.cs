@@ -13,15 +13,13 @@ namespace Ui.Cards
         [SerializeField]
         private List<CardsPairContainer> pairContainers;
 
-        private IInputsHandler _inputsHandler;
         private IBattleProvider _battleProvider;
 
         private bool _isBattleStarted;
 
         [Inject]
-        private void Construct(IBattleProvider battle, IInputsHandler inputsHandler)
+        private void Construct(IBattleProvider battle)
         {
-            _inputsHandler = inputsHandler;
             _battleProvider = battle;
         }
         private void Awake()
@@ -29,7 +27,7 @@ namespace Ui.Cards
             _battleProvider.OnBattleStart += OnBattleStart;
             _battleProvider.OnBattleEnd += OnBattleEnd;
 
-            _inputsHandler.OnSwitchPerformed += OnSwitchPerformed;
+            _battleProvider.OnCardSwitchingStarted += OnSwitchPerformed;
         }
 
         private void OnDestroy()
@@ -37,14 +35,14 @@ namespace Ui.Cards
             _battleProvider.OnBattleStart -= OnBattleStart;
             _battleProvider.OnBattleEnd -= OnBattleEnd;
 
-            _inputsHandler.OnSwitchPerformed -= OnSwitchPerformed;
+            _battleProvider.OnCardSwitchingStarted -= OnSwitchPerformed;
         }
 
-        private void OnSwitchPerformed(int obj)
+        private void OnSwitchPerformed(int obj, float time)
         {
             if (!_isBattleStarted)
                 return;
-            pairContainers[obj - 1].Switch();
+            pairContainers[obj].Switch(time);
         }
 
         private void OnBattleEnd(BattleResult result)

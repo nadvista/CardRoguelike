@@ -51,5 +51,10 @@ namespace Implementation.Cards
                 timer.Release();
             }
         }
+
+        public void Reset()
+        {
+            Dispose();
+        }
     }
 }

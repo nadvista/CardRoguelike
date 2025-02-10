@@ -7,6 +7,7 @@ namespace Core.Cards
     {
         public bool IsCardBlocked(BaseCard card);
         public void BlockCard(BaseCard card);
+        public void Reset();
         public event Action<BaseCard, GameTimer> OnBlockCard;
         public event Action<BaseCard, GameTimer> OnUnblockCard;
     }

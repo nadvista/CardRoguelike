@@ -10,26 +10,28 @@ using Core.Steps;
 using Core.Tools.Timer;
 using Implementation.Params.Modifiers;
 using System;
-using UnityEngine;
 
 namespace Implementation.Battle
 {
     public class BattleProvider : IBattleProvider, IDisposable
     {
+        private const float TOTAL_CARDS_SWITCHING_TIME = 0.3f;
+
         private IDesksProvider _deskProvider;
         private IPlayerProvider _playerProvider;
         private IEnemyProvider _enemyProvider;
         private GlobalStepsCounter _stepCounter;
 
         private ModifiersPool _modifiersPool;
+        private BattleCardsController _cardsController;
 
         private GameTimer _gameTimer;
         private ScoreCounter _scoreCounter;
-        private ICardsCooldownProvider _cardsCooldownProvider;
 
-        public event Action<GameActor, GameActor, CardsDesk> OnBattleStart;
+        public event Action<GamePlayer, GameEnemy, CardsDesk> OnBattleStart;
         public event Action<BattleResult> OnBattleEnd;
         public event Action<BaseCard, PlayCardResult> OnPlayCard;
+        public event Action<int, float> OnCardSwitchingStarted;
 
         public bool IsBattleStarted { get; private set; }
         public GamePlayer CurrentPlayer { get; private set; }
@@ -56,51 +58,37 @@ namespace Implementation.Battle
             _scoreCounter = scoreCounter;
             _modifiersPool = modifiersPool;
             _stepCounter = stepCounter;
-            _cardsCooldownProvider = cooldownProvider;
+
+            _cardsController = new BattleCardsController(cooldownProvider, gameTimersPool);
         }
 
-        public void PlayBattleCard(BaseCard card)
+        public void PlayBattleCard(int deskCardIndex)
         {
+            var card = _cardsController.GetCardByIndex(deskCardIndex);
             if (!IsBattleStarted)
             {
                 OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
-                return;
             }
-            if (!CurrentCardsDesk.Cards.Contains(card))
-            {
-                Debug.LogError("it is impossible to play a card that is not in the deck");
-                OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
-                return;
-            }
-            if (!CanPlayCard(card))
-            {
-                OnPlayCard?.Invoke(card, PlayCardResult.Unsuccess);
-                return;
-            }
+
             var time = _gameTimer.CurrentTimeSeconds;
             var timeBonus = _scoreCounter.CalculateScore(time);
 
-            PlayerMana.AddForeverValue(-card.ManaCost.ActualValue);
+            var result = _cardsController.PlayBattleCard(deskCardIndex, CurrentPlayer, CurrentEnemy, timeBonus);
 
-            foreach (var action in card.Actions)
-                action.DoAction(CurrentPlayer, CurrentEnemy, timeBonus);
+            if(result == PlayCardResult.Success)
+            {
+                _stepCounter.NewStep();
+                _gameTimer.Start();
+            }
 
-            _stepCounter.NewStep();
-            _gameTimer.Start();
-            _cardsCooldownProvider.BlockCard(card);
-
-            OnPlayCard?.Invoke(card, PlayCardResult.Success);
+            OnPlayCard?.Invoke(card, result);
         }
-        public void PlayBattleCard(int deskCardIndex)
+        public void SwitchCardsPair(int number)
         {
             if (!IsBattleStarted)
                 return;
-            if (deskCardIndex >= CurrentCardsDesk.Cards.Count)
-                return;
-
-            var card = CurrentCardsDesk.Cards[deskCardIndex];
-
-            PlayBattleCard(card);
+            var timeToSwitch = _cardsController.SwitchCards(number, TOTAL_CARDS_SWITCHING_TIME);
+            OnCardSwitchingStarted?.Invoke(number, timeToSwitch);
         }
 
         public void StopBattle()
@@ -116,6 +104,7 @@ namespace Implementation.Battle
             ResolveBattleProps();
             ResetBattleProps();
             SubscribeBattlePropsEvents();
+            _cardsController.SetupDesk(CurrentCardsDesk);
             _gameTimer.Start();
 
             IsBattleStarted = true;
@@ -125,6 +114,7 @@ namespace Implementation.Battle
         public void Dispose()
         {
             StopBattle();
+            _cardsController.Dispose();
         }
 
         private void UnsubscribeBattlePropsEvents()
@@ -159,11 +149,7 @@ namespace Implementation.Battle
             UnsubscribeBattlePropsEvents();
             IsBattleStarted = false;
             OnBattleEnd?.Invoke(result);
-        }
-
-        private bool CanPlayCard(BaseCard card)
-        {
-            return PlayerMana.ActualValue >= card.ManaCost.ActualValue && !_cardsCooldownProvider.IsCardBlocked(card);
+            _cardsController.Reset();
         }
 
         private void OnEnemyDead()
