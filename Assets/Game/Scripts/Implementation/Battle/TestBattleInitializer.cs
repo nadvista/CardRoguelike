@@ -16,7 +16,7 @@ namespace Implementation.Battle
 
         private void Start()
         {
-            _battle.StartBattle();
+            _battle.PrepareBattle();
         }
     }
 }

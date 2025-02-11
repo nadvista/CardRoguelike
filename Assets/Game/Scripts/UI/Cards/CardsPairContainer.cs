@@ -98,5 +98,10 @@ namespace Ui.Cards
                 _switchingSequence = null;
             });
         }
+        public void SetPositionToDefault()
+        {
+            if (_currentPosition == PairPosition.Switched)
+                Switch(0);
+        }    
     }
 }

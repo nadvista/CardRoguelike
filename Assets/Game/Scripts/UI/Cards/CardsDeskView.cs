@@ -24,7 +24,7 @@ namespace Ui.Cards
         }
         private void Awake()
         {
-            _battleProvider.OnBattleStart += OnBattleStart;
+            _battleProvider.OnBattlePrepared += OnBattleStart;
             _battleProvider.OnBattleEnd += OnBattleEnd;
 
             _battleProvider.OnCardSwitchingStarted += OnSwitchPerformed;
@@ -32,7 +32,7 @@ namespace Ui.Cards
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattleStart -= OnBattleStart;
+            _battleProvider.OnBattlePrepared -= OnBattleStart;
             _battleProvider.OnBattleEnd -= OnBattleEnd;
 
             _battleProvider.OnCardSwitchingStarted -= OnSwitchPerformed;
@@ -48,6 +48,8 @@ namespace Ui.Cards
         private void OnBattleEnd(BattleResult result)
         {
             _isBattleStarted = false;
+            foreach (var pair in pairContainers)
+                pair.SetPositionToDefault();
         }
 
         private void OnBattleStart(GameActor actor1, GameActor actor2, CardsDesk desk)

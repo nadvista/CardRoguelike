@@ -10,12 +10,14 @@ namespace Core.Battle
 {
     public interface IBattleProvider
     {
-        public event Action<GamePlayer, GameEnemy, CardsDesk> OnBattleStart;
+        public event Action<GamePlayer, GameEnemy, CardsDesk> OnBattlePrepared;
         public event Action<BattleResult> OnBattleEnd;
+        public event Action OnBattleStarted;
         public event Action<BaseCard, PlayCardResult> OnPlayCard;
         public event Action<int, float> OnCardSwitchingStarted;
 
         public bool IsBattleStarted { get; }
+        public bool IsBattlePrepared { get; }
         public GamePlayer CurrentPlayer { get; }
         public GameEnemy CurrentEnemy { get; }
         public CardsDesk CurrentCardsDesk { get; }
@@ -30,5 +32,6 @@ namespace Core.Battle
 
         public void StopBattle();
         public void StartBattle();
+        public void PrepareBattle();
     }
 }

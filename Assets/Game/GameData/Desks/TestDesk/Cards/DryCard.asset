@@ -13,16 +13,24 @@ MonoBehaviour:
   m_Name: DryCard
   m_EditorClassIdentifier: 
   <CardData>k__BackingField:
-    PreviewImage: {fileID: 0}
-    CardName: 
-  <Id>k__BackingField: 
+    PreviewImage: {fileID: 21300000, guid: 93f5f37c881ad8b4e91104733cd81b37, type: 3}
+    CardName: Dry
+  <Id>k__BackingField: Dry
   <ManaCost>k__BackingField:
-    <Type>k__BackingField: 0
-    baseValue: 0
-    minValue: 0
-    maxValue: 0
-  <CooldownSeconds>k__BackingField: 1
-  <Actions>k__BackingField: []
+    <Type>k__BackingField: 3
+    baseValue: 20
+    minValue: 15
+    maxValue: 25
+  <CooldownSeconds>k__BackingField: 5
+  <Actions>k__BackingField:
+  - rid: 3242848182841638974
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3242848182841638974
+      type: {class: DecreaseParamAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
+      data:
+        decreaseCount: 100
+        duration: 2
+        bonusAttackParamName: 4
+        decreasingParam: 4

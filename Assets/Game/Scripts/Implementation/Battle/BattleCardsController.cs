@@ -14,15 +14,17 @@ namespace Implementation.Battle
 {
     internal partial class BattleCardsController : IDisposable
     {
+        private IBattleProvider _battleProvider;
         private ICardsCooldownProvider _cardsCooldownProvider;
         private CardsDesk _currentDesk;
         private TimersPool _timersPool;
         private List<Pair> _pairs = new List<Pair>();
 
-        public BattleCardsController(ICardsCooldownProvider cardsCooldownProvider, TimersPool timers)
+        public BattleCardsController(ICardsCooldownProvider cardsCooldownProvider, IBattleProvider battle, TimersPool timers)
         {
             _cardsCooldownProvider = cardsCooldownProvider;
             _timersPool = timers;
+            _battleProvider = battle;
         }
 
         public void SetupDesk(CardsDesk desk)
@@ -98,7 +100,7 @@ namespace Implementation.Battle
 
         private bool CanPlayCard(BaseCard card, GamePlayer player)
         {
-            return player.HealthParam.ActualValue >= card.ManaCost.ActualValue && !_cardsCooldownProvider.IsCardBlocked(card) && !_pairs.First(e => e.Main == card).IsSwitching;
+            return _battleProvider.IsBattleStarted && player.HealthParam.ActualValue >= card.ManaCost.ActualValue && !_cardsCooldownProvider.IsCardBlocked(card) && !_pairs.First(e => e.Main == card).IsSwitching;
         }
     }
 }

@@ -28,12 +28,14 @@ namespace Implementation.Battle
         private GameTimer _gameTimer;
         private ScoreCounter _scoreCounter;
 
-        public event Action<GamePlayer, GameEnemy, CardsDesk> OnBattleStart;
+        public event Action<GamePlayer, GameEnemy, CardsDesk> OnBattlePrepared;
+        public event Action OnBattleStarted;
         public event Action<BattleResult> OnBattleEnd;
         public event Action<BaseCard, PlayCardResult> OnPlayCard;
         public event Action<int, float> OnCardSwitchingStarted;
 
         public bool IsBattleStarted { get; private set; }
+        public bool IsBattlePrepared { get; private set; }  
         public GamePlayer CurrentPlayer { get; private set; }
         public GameEnemy CurrentEnemy { get; private set; }
         public CardsDesk CurrentCardsDesk { get; private set; }
@@ -59,7 +61,7 @@ namespace Implementation.Battle
             _modifiersPool = modifiersPool;
             _stepCounter = stepCounter;
 
-            _cardsController = new BattleCardsController(cooldownProvider, gameTimersPool);
+            _cardsController = new BattleCardsController(cooldownProvider, this, gameTimersPool);
         }
 
         public void PlayBattleCard(int deskCardIndex)
@@ -85,8 +87,6 @@ namespace Implementation.Battle
         }
         public void SwitchCardsPair(int number)
         {
-            if (!IsBattleStarted)
-                return;
             var timeToSwitch = _cardsController.SwitchCards(number, TOTAL_CARDS_SWITCHING_TIME);
             OnCardSwitchingStarted?.Invoke(number, timeToSwitch);
         }
@@ -95,7 +95,7 @@ namespace Implementation.Battle
         {
             StopBattle(BattleResult.Loose);
         }
-        public void StartBattle()
+        public void PrepareBattle()
         {
             if (IsBattleStarted)
                 StopBattle();
@@ -105,10 +105,17 @@ namespace Implementation.Battle
             ResetBattleProps();
             SubscribeBattlePropsEvents();
             _cardsController.SetupDesk(CurrentCardsDesk);
+            IsBattlePrepared = true;
+            OnBattlePrepared?.Invoke(CurrentPlayer, CurrentEnemy, CurrentCardsDesk);
+        }
+        public void StartBattle()
+        {
+            if (!IsBattlePrepared)
+                return;
             _gameTimer.Start();
 
             IsBattleStarted = true;
-            OnBattleStart?.Invoke(CurrentPlayer, CurrentEnemy, CurrentCardsDesk);
+            OnBattleStarted?.Invoke();
         }
 
         public void Dispose()
@@ -145,9 +152,11 @@ namespace Implementation.Battle
         
         private void StopBattle(BattleResult result)
         {
+            _gameTimer.ResetTime();
             _gameTimer.Stop();
             UnsubscribeBattlePropsEvents();
             IsBattleStarted = false;
+            IsBattlePrepared = false;
             OnBattleEnd?.Invoke(result);
             _cardsController.Reset();
         }

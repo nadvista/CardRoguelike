@@ -31,13 +31,13 @@ namespace Ui.Params
         {
             imageTimerFill.type = Image.Type.Filled;
 
-            _battleProvider.OnBattleStart += OnBattleStart;
+            _battleProvider.OnBattleStarted += OnBattleStart;
             _battleProvider.OnBattleEnd += OnBattleEnd;
         }
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattleStart -= OnBattleStart;
+            _battleProvider.OnBattleStarted -= OnBattleStart;
             _battleProvider.OnBattleEnd -= OnBattleEnd;
         }
 
@@ -53,8 +53,9 @@ namespace Ui.Params
         private void OnBattleEnd(BattleResult result)
         {
             _isWorking = false;
+            imageTimerFill.fillAmount = 1f;
         }
-        private void OnBattleStart(GameActor actor1, GameActor actor2, CardsDesk desk)
+        private void OnBattleStart()
         {
             _isWorking = true;
         }

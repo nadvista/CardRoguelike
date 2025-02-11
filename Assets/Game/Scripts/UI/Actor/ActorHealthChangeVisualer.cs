@@ -42,7 +42,7 @@ namespace Ui.Actors
 
         private void Awake()
         {
-            _battleProvider.OnBattleStart += OnBattleStart;
+            _battleProvider.OnBattlePrepared += OnBattlePrepare;
             _battleProvider.OnBattleEnd += OnBattleEnd;
         }
         private void Start()
@@ -53,7 +53,7 @@ namespace Ui.Actors
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattleStart -= OnBattleStart;
+            _battleProvider.OnBattlePrepared -= OnBattlePrepare;
             _battleProvider.OnBattleEnd -= OnBattleEnd;
 
             ResetActor();
@@ -64,7 +64,7 @@ namespace Ui.Actors
             ResetActor();
         }
 
-        private void OnBattleStart(GamePlayer player, GameEnemy enemy, CardsDesk desk)
+        private void OnBattlePrepare(GamePlayer player, GameEnemy enemy, CardsDesk desk)
         {
             switch (type)
             {

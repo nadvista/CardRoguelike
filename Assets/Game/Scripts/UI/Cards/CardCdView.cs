@@ -50,7 +50,7 @@ namespace Ui.Cards
         {
             if (card != _card || _card == null)
                 return;
-
+            _viewFilledImage.fillAmount = 0;
             _cdTimer.OnTick -= OnCdTimerTick;
             _cdTimer = null;
         }

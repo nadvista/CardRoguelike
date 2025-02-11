@@ -46,15 +46,21 @@ namespace Implementation.Cards
 
         public void Dispose()
         {
-            foreach (var timer in _timers)
-            {
-                timer.Release();
-            }
+            Reset();
         }
 
         public void Reset()
         {
-            Dispose();
+            foreach(var card in _blockedCards)
+            {
+                OnUnblockCard?.Invoke(card, null);
+            }
+            foreach (var timer in _timers)
+            {
+                timer.Release();
+            }
+            _blockedCards.Clear();
+            _timers.Clear();
         }
     }
 }

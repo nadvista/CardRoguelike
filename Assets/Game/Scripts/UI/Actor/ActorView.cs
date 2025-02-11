@@ -40,11 +40,11 @@ namespace Ui.Actors
         }
         private void Awake()
         {
-            _battleProvider.OnBattleStart += OnNewBattle;
+            _battleProvider.OnBattlePrepared += OnNewBattle;
         }
         private void OnDestroy()
         {
-            _battleProvider.OnBattleStart -= OnNewBattle;
+            _battleProvider.OnBattlePrepared -= OnNewBattle;
         }
 
         private void OnNewBattle(GameActor actor1, GameActor actor2, CardsDesk desk)

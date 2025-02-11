@@ -42,7 +42,10 @@ namespace Core.Tools.Timer
 
             OnTimerStop?.Invoke();
         }
-
+        public void ResetTime()
+        {
+            CurrentTimeSeconds = 0f;
+        }
         public void Pause()
         {
             if (!IsStarted)
