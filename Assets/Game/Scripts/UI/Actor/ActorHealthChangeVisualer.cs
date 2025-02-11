@@ -1,77 +1,124 @@
 ﻿using Core.Actors;
+using Core.Actors.Enemies;
+using Core.Actors.Players;
+using Core.Battle;
+using Core.Desk;
 using Core.Tools;
 using Core.Tools.Timer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using Zenject;
 
 namespace Ui.Actors
 {
-    public class ActorHealthChangeVisualer : IDisposable
+    public class ActorHealthChangeVisualer : MonoBehaviour
     {
-        private const float SHOW_INDICATOR_TIME = 1f;
-        private IEnumerable<TextMeshProUGUI> _hitIndicators;
+        [SerializeField]
+        private ActorViewType type;
+
+        [SerializeField]
+        private  float showIndicatorTimeSeconds = 1f;
+
+        [SerializeField]
+        private List<TextMeshProUGUI> hitIndicators;
 
         private TextMeshProUGUI _showingIndicator;
 
         private GameActor _actor;
         private float _lastHealthValue;
 
-        private TimersPool _timersPool;
-        private GameTimer _activeTimer;
+        private Coroutine _showIndicatorCoroutine;
 
-        public ActorHealthChangeVisualer(IEnumerable<TextMeshProUGUI> hitIndicators, TimersPool timers)
+        private IBattleProvider _battleProvider;
+
+        [Inject]
+        private void Construct(IBattleProvider battleProvider)
         {
-            _hitIndicators = hitIndicators;
-            _timersPool = timers;
+            _battleProvider = battleProvider;
         }
 
-        public void Setup(GameActor actor)
+        private void Awake()
         {
-            Reset();
-
-            _actor = actor;
-            _actor.HealthParam.OnValueChange += OnChangeHealth;
-            _lastHealthValue = _actor.HealthParam.ActualValue;
-            foreach(var indicator in _hitIndicators)
+            _battleProvider.OnBattleStart += OnBattleStart;
+            _battleProvider.OnBattleEnd += OnBattleEnd;
+        }
+        private void Start()
+        {
+            foreach (var indicator in hitIndicators)
                 indicator.gameObject.SetActive(false);
         }
 
-        public void Dispose() 
+        private void OnDestroy()
         {
-            UnsubscribeHealthChange();
-        }
-        public void Reset() 
-        {
-            UnsubscribeHealthChange();
-            _activeTimer?.Release();
+            _battleProvider.OnBattleStart -= OnBattleStart;
+            _battleProvider.OnBattleEnd -= OnBattleEnd;
+
+            ResetActor();
         }
 
-        private void UnsubscribeHealthChange()
+        private void OnBattleEnd(BattleResult result)
+        {
+            ResetActor();
+        }
+
+        private void OnBattleStart(GamePlayer player, GameEnemy enemy, CardsDesk desk)
+        {
+            switch (type)
+            {
+                case ActorViewType.Player:
+                    Setup(player);
+                    return;
+                case ActorViewType.Enemy:
+                    Setup(enemy);
+                    return;
+            }
+        }
+
+        private void Setup(GameActor actor)
+        {
+            ResetActor();
+            _actor = actor;
+            _lastHealthValue = _actor.HealthParam.ActualValue;
+            _actor.HealthParam.OnValueChange += OnHealthChange;
+        }
+
+        private void ResetActor()
         {
             if (_actor != null)
-                _actor.HealthParam.OnValueChange -= OnChangeHealth;
+                _actor.HealthParam.OnValueChange -= OnHealthChange;
+            StopHideCoroutine();
+            _showingIndicator?.gameObject.SetActive(false);
         }
 
-        private void OnChangeHealth()
+        private void StopHideCoroutine()
         {
-            var difference = _lastHealthValue - _actor.HealthParam.ActualValue;
+            if (_showIndicatorCoroutine != null)
+                StopCoroutine(_showIndicatorCoroutine);
+        }
+
+        private void OnHealthChange()
+        {
+            var diff = _actor.HealthParam.ActualValue - _lastHealthValue;
             _lastHealthValue = _actor.HealthParam.ActualValue;
 
             _showingIndicator?.gameObject.SetActive(false);
 
-            _showingIndicator = _hitIndicators.RandomElement();
-            _showingIndicator.text = $"-{difference.ToString()}";
+            _showingIndicator = hitIndicators.RandomElement();
+            _showingIndicator.text = diff.ToString("F2");
+            _showingIndicator.gameObject.SetActive(true);
 
-            if (_activeTimer == null)
-                _activeTimer = _timersPool.Get();
+            StopHideCoroutine();
+            _showIndicatorCoroutine = StartCoroutine(HideIndicatorCoroutine());
+        }
 
-            _showingIndicator?.gameObject.SetActive(true);
-
-            _activeTimer.Start(SHOW_INDICATOR_TIME, () => { 
-                _showingIndicator.gameObject.SetActive(false );
-                _activeTimer.Release();
-            });
+        private IEnumerator HideIndicatorCoroutine()
+        {
+            yield return new WaitForSeconds(showIndicatorTimeSeconds);
+            _showingIndicator.gameObject.SetActive(false);
+            _showIndicatorCoroutine = null;
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Core.Cards
 {
+    [CreateAssetMenu(menuName = "Game/Cards/Card")]
     [Serializable]
     public class BaseCard : ScriptableObject
     {

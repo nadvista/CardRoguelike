@@ -94,6 +94,11 @@ MonoBehaviour:
   iconImage: {fileID: 5436231918543657066}
   nameLabel: {fileID: 5760578159890832452}
   paramsContainer: {fileID: 4367232987708837175}
+  _hitIndicators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &2105136460547697517
 GameObject:
   m_ObjectHideFlags: 0
