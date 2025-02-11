@@ -2,7 +2,8 @@
 using Core.Battle;
 using Core.Desk;
 using Core.Params;
-using System;
+using Core.Tools.Timer;
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -27,12 +28,17 @@ namespace Ui.Actors
         [SerializeField]
         private ParamsContainerView paramsContainer;
 
+        [SerializeField]
+        private List<TextMeshProUGUI> _hitIndicators;
+
         private IBattleProvider _battleProvider;
+        private ActorHealthChangeVisualer _healthVisualizerComponent;
 
         [Inject]
-        private void Construct(IBattleProvider battleProvider)
+        private void Construct(IBattleProvider battleProvider, TimersPool timers)
         {
             _battleProvider = battleProvider;
+            _healthVisualizerComponent = new ActorHealthChangeVisualer(_hitIndicators, timers);
         }
         private void Awake()
         {
@@ -66,6 +72,7 @@ namespace Ui.Actors
             allParams.Add(data.HealthParam);
 
             paramsContainer.Fill(allParams);
+            _healthVisualizerComponent.Setup(data);
         }
     }
 }
