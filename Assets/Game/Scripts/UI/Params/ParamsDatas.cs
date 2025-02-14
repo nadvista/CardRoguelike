@@ -1,13 +1,11 @@
 ﻿using Core.Params;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace UI
 {
-    [CreateAssetMenu(menuName ="Game/Ui/ParamsData")]
+    [CreateAssetMenu(menuName = "Game/Ui/ParamsData")]
     public class ParamsDatas : ScriptableObject
     {
         [field: SerializeField]

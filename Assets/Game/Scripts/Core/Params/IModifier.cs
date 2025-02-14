@@ -1,5 +1,4 @@
-﻿using Core.Tools.Pool;
-using System;
+﻿using System;
 
 namespace Core.Params
 {

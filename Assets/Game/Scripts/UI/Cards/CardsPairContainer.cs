@@ -1,6 +1,5 @@
 ﻿using Core.Cards;
 using DG.Tweening;
-using System;
 using UnityEngine;
 
 namespace Ui.Cards
@@ -62,9 +61,9 @@ namespace Ui.Cards
             }
 
             //inverse position
-            _currentPosition = _currentPosition == PairPosition.Normal? PairPosition.Switched: PairPosition.Normal;
+            _currentPosition = _currentPosition == PairPosition.Normal ? PairPosition.Switched : PairPosition.Normal;
 
-            Vector3 newMainPos = Vector3.zero; 
+            Vector3 newMainPos = Vector3.zero;
             Vector3 newMainScale = Vector3.zero;
             Vector3 newSecondaryPos = Vector3.zero;
             Vector3 newSecondaryScale = Vector3.zero;
@@ -94,7 +93,8 @@ namespace Ui.Cards
             _switchingSequence.Insert(0, _secondaryRect.DOAnchorPos(newSecondaryPos, time));
             _switchingSequence.Insert(0, _secondaryRect.DOSizeDelta(newSecondaryScale, time));
 
-            _switchingSequence.OnComplete(() => {
+            _switchingSequence.OnComplete(() =>
+            {
                 _switchingSequence = null;
             });
         }
@@ -102,6 +102,6 @@ namespace Ui.Cards
         {
             if (_currentPosition == PairPosition.Switched)
                 Switch(0);
-        }    
+        }
     }
 }

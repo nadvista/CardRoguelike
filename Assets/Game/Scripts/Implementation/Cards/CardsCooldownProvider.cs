@@ -51,7 +51,7 @@ namespace Implementation.Cards
 
         public void Reset()
         {
-            foreach(var card in _blockedCards)
+            foreach (var card in _blockedCards)
             {
                 OnUnblockCard?.Invoke(card, null);
             }

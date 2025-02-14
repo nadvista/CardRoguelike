@@ -1,5 +1,4 @@
-﻿using Core.Steps;
-using Core.Tools.Pool;
+﻿using Core.Tools.Pool;
 
 namespace Implementation.Params.Modifiers
 {

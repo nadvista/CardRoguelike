@@ -4,8 +4,6 @@ using Core.Actors.Players;
 using Core.Battle;
 using Core.Desk;
 using Core.Tools;
-using Core.Tools.Timer;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,7 +18,7 @@ namespace Ui.Actors
         private ActorViewType type;
 
         [SerializeField]
-        private  float showIndicatorTimeSeconds = 1f;
+        private float showIndicatorTimeSeconds = 1f;
 
         [SerializeField]
         private List<TextMeshProUGUI> hitIndicators;

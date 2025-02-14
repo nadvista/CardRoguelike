@@ -1,7 +1,4 @@
 using Core.Params;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -43,7 +40,7 @@ namespace Ui.Params
 
         protected override void OnDeactivate()
         {
-            if(Data != null)
+            if (Data != null)
                 Data.OnValueChange -= OnParamChange;
         }
 

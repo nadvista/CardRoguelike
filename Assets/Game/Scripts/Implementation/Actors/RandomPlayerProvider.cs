@@ -1,6 +1,5 @@
 ﻿using Core.Actors.Players;
 using Core.Tools;
-using System;
 
 namespace Implementation.Actors
 {

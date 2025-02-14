@@ -28,13 +28,14 @@ namespace Core.Params
             this.maxValue = maxValue;
         }
 
-        public List<Modifier> Modifiers { 
-            get 
-            { 
-                if(_modifiers == null)
+        public List<Modifier> Modifiers
+        {
+            get
+            {
+                if (_modifiers == null)
                     _modifiers = new List<Modifier>();
                 return _modifiers;
-            } 
+            }
         }
         private List<Modifier> _modifiers;
 
@@ -48,7 +49,7 @@ namespace Core.Params
                 var toRemoveMods = new List<Modifier>();
                 foreach (var modifier in Modifiers)
                 {
-                    if(modifier.Duration <= 0)
+                    if (modifier.Duration <= 0)
                         toRemoveMods.Add(modifier);
                     else
                         result = modifier.Modify(result);
@@ -90,7 +91,7 @@ namespace Core.Params
 
         private void RemoveEventsListeners()
         {
-            foreach(var modifier in Modifiers)
+            foreach (var modifier in Modifiers)
                 modifier.OnModifierLate -= OnModifierLate;
         }
         private void OnModifierLate(Modifier modifier)

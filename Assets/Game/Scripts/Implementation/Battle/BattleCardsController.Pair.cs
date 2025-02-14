@@ -59,7 +59,7 @@ namespace Implementation.Battle
             }
             public void ReleaseTimer()
             {
-                if(_switchingTimer != null)
+                if (_switchingTimer != null)
                     _switchingTimer.Release();
             }
 

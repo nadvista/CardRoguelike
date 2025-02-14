@@ -1,9 +1,7 @@
 ﻿using Core.Steps;
 using Core.Tools.Pool;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Core.Params
 {
@@ -25,7 +23,7 @@ namespace Core.Params
 
         public float Modify(float value)
         {
-            if(Duration > 0)
+            if (Duration > 0)
                 return GetModifiedValue(value);
             return value;
         }
@@ -52,7 +50,7 @@ namespace Core.Params
         private void OnNewStep()
         {
             Duration--;
-            if(Duration <= 0)
+            if (Duration <= 0)
             {
                 OnModifierLate?.Invoke(this);
                 _stepsCounter.OnNewStep -= OnNewStep;

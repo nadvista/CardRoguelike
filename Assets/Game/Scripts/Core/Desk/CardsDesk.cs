@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.Desk
 {
-    [CreateAssetMenu(menuName ="Game/Desk")]
+    [CreateAssetMenu(menuName = "Game/Desk")]
     public class CardsDesk : ScriptableObject
     {
         [field: SerializeField]

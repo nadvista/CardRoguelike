@@ -11,7 +11,7 @@ namespace Core.Tools.Timer
 
         public void Tick()
         {
-            foreach(var timer in _workingElements)
+            foreach (var timer in _workingElements)
                 timer.Tick();
         }
     }

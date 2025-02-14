@@ -1,5 +1,4 @@
 ﻿using Core.Cards;
-using Core.ScoreCounting;
 using Core.Tools.Timer;
 using UnityEngine.UI;
 

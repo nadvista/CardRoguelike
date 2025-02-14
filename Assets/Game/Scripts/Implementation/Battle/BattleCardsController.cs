@@ -1,5 +1,4 @@
-﻿using Codice.Client.Common;
-using Core.Actors.Enemies;
+﻿using Core.Actors.Enemies;
 using Core.Actors.Players;
 using Core.Battle;
 using Core.Cards;
@@ -56,8 +55,8 @@ namespace Implementation.Battle
         }
         public void Reset()
         {
-            foreach(var pair in _pairs)
-                pair.ReleaseTimer(); 
+            foreach (var pair in _pairs)
+                pair.ReleaseTimer();
             _cardsCooldownProvider.Reset();
         }
 
@@ -93,8 +92,8 @@ namespace Implementation.Battle
             return pair.StartSwitching(totalTime);
         }
 
-        public BaseCard GetCardByIndex(int cardIndex) 
-        { 
+        public BaseCard GetCardByIndex(int cardIndex)
+        {
             return _pairs[cardIndex].Main;
         }
 

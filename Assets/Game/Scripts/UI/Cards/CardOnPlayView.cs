@@ -41,7 +41,7 @@ namespace Ui.Cards
 
         private void OnPlayAnyCard(BaseCard card, PlayCardResult result)
         {
-            if(card != _card || _card == null || result != PlayCardResult.Unsuccess) 
+            if (card != _card || _card == null || result != PlayCardResult.Unsuccess)
                 return;
 
             if (_animationSequence != null)

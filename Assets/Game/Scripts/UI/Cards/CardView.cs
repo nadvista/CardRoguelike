@@ -1,7 +1,5 @@
 ﻿using Core.Battle;
 using Core.Cards;
-using Core.ScoreCounting;
-using System;
 using System.Collections.Generic;
 using Ui.Hint;
 using UnityEngine;
@@ -43,7 +41,7 @@ namespace Ui.Cards
         }
         protected override void OnSetup(BaseCard data)
         {
-            foreach(var component in _components)
+            foreach (var component in _components)
                 component.SetCard(data);
 
             imagePreview.sprite = data.CardData.PreviewImage;
@@ -57,7 +55,7 @@ namespace Ui.Cards
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(Data == null) 
+            if (Data == null)
                 return;
             _hints.Show(Data.CardData.Description);
         }

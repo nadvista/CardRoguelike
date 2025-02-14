@@ -1,5 +1,4 @@
-﻿using Core.Actors;
-using Core.Actors.Enemies;
+﻿using Core.Actors.Enemies;
 using Core.Actors.Players;
 using Core.Cards;
 using Core.Desk;

@@ -1,7 +1,6 @@
 ﻿using Core.Actors;
 using Core.Battle;
 using Core.Desk;
-using Core.Inputs;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -57,12 +56,12 @@ namespace Ui.Cards
             _isBattleStarted = true;
 
             var pairsCount = Mathf.CeilToInt(desk.Cards.Count / 2);
-            if(pairsCount > pairContainers.Count)
+            if (pairsCount > pairContainers.Count)
             {
                 Debug.LogError("Количество пар карт превышает количество контейнеров");
             }
             var cycleCount = Mathf.Min(pairsCount, pairContainers.Count);
-            for(int pair = 0; pair < cycleCount; pair++)
+            for (int pair = 0; pair < cycleCount; pair++)
             {
                 var container = pairContainers[pair];
 

@@ -19,7 +19,7 @@ namespace Core.ScoreCounting
 
         public float CalculateScore(float time)
         {
-            if(BonusTimeSeconds == 0)
+            if (BonusTimeSeconds == 0)
             {
                 Debug.LogError("Не задано бонусное время");
                 BonusTimeSeconds = 0.1f;

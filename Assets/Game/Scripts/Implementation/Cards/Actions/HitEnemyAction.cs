@@ -36,7 +36,7 @@ namespace Implementation.Cards.Actions
             {
                 foreach (var item in defense)
                 {
-                    if(item.ActualValue != 0)
+                    if (item.ActualValue != 0)
                         scaledDamage /= item.ActualValue;
                 }
             }

@@ -1,5 +1,4 @@
-﻿using Core.Actors;
-using Core.Actors.Enemies;
+﻿using Core.Actors.Enemies;
 using Core.Actors.Players;
 using Core.Battle;
 using Core.Cards;
@@ -35,7 +34,7 @@ namespace Implementation.Battle
         public event Action<int, float> OnCardSwitchingStarted;
 
         public bool IsBattleStarted { get; private set; }
-        public bool IsBattlePrepared { get; private set; }  
+        public bool IsBattlePrepared { get; private set; }
         public GamePlayer CurrentPlayer { get; private set; }
         public GameEnemy CurrentEnemy { get; private set; }
         public CardsDesk CurrentCardsDesk { get; private set; }
@@ -46,11 +45,11 @@ namespace Implementation.Battle
 
         public Param EnemyHeahth => CurrentEnemy.HealthParam;
 
-        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider, 
-            GlobalStepsCounter stepCounter, 
-            TimersPool gameTimersPool, 
-            ScoreCounter scoreCounter, 
-            ModifiersPool modifiersPool, 
+        public BattleProvider(IDesksProvider deskProvider, IPlayerProvider player, IEnemyProvider enemyProvider,
+            GlobalStepsCounter stepCounter,
+            TimersPool gameTimersPool,
+            ScoreCounter scoreCounter,
+            ModifiersPool modifiersPool,
             ICardsCooldownProvider cooldownProvider)
         {
             _deskProvider = deskProvider;
@@ -77,7 +76,7 @@ namespace Implementation.Battle
 
             var result = _cardsController.PlayBattleCard(deskCardIndex, CurrentPlayer, CurrentEnemy, timeBonus);
 
-            if(result == PlayCardResult.Success)
+            if (result == PlayCardResult.Success)
             {
                 _stepCounter.NewStep();
                 _gameTimer.Start();
@@ -149,7 +148,7 @@ namespace Implementation.Battle
             CurrentPlayer?.Initialize();
             CurrentEnemy?.Initialize();
         }
-        
+
         private void StopBattle(BattleResult result)
         {
             _gameTimer.ResetTime();

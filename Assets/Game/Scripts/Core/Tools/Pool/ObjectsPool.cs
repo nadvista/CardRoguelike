@@ -18,7 +18,7 @@ namespace Core.Tools.Pool
         }
         public PoolElementType Get()
         {
-            if(_inactiveElements.Count == 0)
+            if (_inactiveElements.Count == 0)
             {
                 CollectInactiveElements();
             }
@@ -51,12 +51,12 @@ namespace Core.Tools.Pool
 
         private void CollectInactiveElements()
         {
-            foreach(var element in _workingElements)
+            foreach (var element in _workingElements)
             {
-                if(element.IsInactive)
+                if (element.IsInactive)
                     _toremove.Add(element);
             }
-            foreach(var element in _toremove)
+            foreach (var element in _toremove)
             {
                 element.OnReturnToPool();
                 _workingElements.Remove(element);

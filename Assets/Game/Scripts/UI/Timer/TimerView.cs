@@ -1,9 +1,5 @@
-﻿using Core.Actors;
-using Core.Battle;
-using Core.Desk;
+﻿using Core.Battle;
 using Core.ScoreCounting;
-using Core.Steps;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
