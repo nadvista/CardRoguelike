@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae278631f931baf44b1be7b2271f4dad, type: 3}
-  m_Name: TestDesk
+  m_Name: New Cards Desk
   m_EditorClassIdentifier: 
   <Cards>k__BackingField:
-  - {fileID: 11400000, guid: d1b5638fdf2472e46a96bad2de9ec475, type: 2}
-  - {fileID: 11400000, guid: 176c55111d3792848aedced10a8f6811, type: 2}
-  - {fileID: 11400000, guid: 5c90c1bc7ce6a8b44a6d896a88d24a73, type: 2}
-  - {fileID: 11400000, guid: 380bd1aa89677e149a12e203c0e9a148, type: 2}
+  - {fileID: 11400000, guid: cddf1cda61082c04aa6ba0fad74f74b4, type: 2}
+  - {fileID: 11400000, guid: a48995c0b00e98149bca121dd38e8ee0, type: 2}
+  - {fileID: 11400000, guid: 35e582bc210259f409b899569f0ae52d, type: 2}
+  - {fileID: 11400000, guid: abfcf3b57244bff44aaa334601c2ed5b, type: 2}

@@ -29,7 +29,7 @@ namespace General.Installers
 
         private void InstallModifierFabrics()
         {
-            Container.BindInterfacesAndSelfTo<SubtractModifierFabric>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ModifierFabric>().AsSingle();
             Container.BindInterfacesAndSelfTo<TimersFabric>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<TimersPool>().AsSingle();

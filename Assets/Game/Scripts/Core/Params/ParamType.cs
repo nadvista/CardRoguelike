@@ -2,6 +2,6 @@
 {
     public enum ParamType
     {
-        Attack, Defence, Health, ManaCost, Fire
+        Attack, Defence, Health, ManaCost, Fire, None
     }
 }

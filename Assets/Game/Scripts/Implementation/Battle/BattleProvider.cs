@@ -76,13 +76,18 @@ namespace Implementation.Battle
 
             var result = _cardsController.PlayBattleCard(deskCardIndex, CurrentPlayer, CurrentEnemy, timeBonus);
 
+            OnPlayCard?.Invoke(card, result);
+
+            if (!_cardsController.CanPlayAnyCard(CurrentPlayer.HealthParam.ActualValue))
+            {
+                StopBattle(BattleResult.Loose);
+                return;
+            }
             if (result == PlayCardResult.Success)
             {
                 _stepCounter.NewStep();
                 _gameTimer.Start();
             }
-
-            OnPlayCard?.Invoke(card, result);
         }
         public void SwitchCardsPair(int number)
         {

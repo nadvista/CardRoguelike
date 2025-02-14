@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d1a49c4a6289a419b872597e00f14a, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  <CardData>k__BackingField:
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: e5a0104f476c0044c8b4b17592570cad, type: 3}
+    <CardName>k__BackingField: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0439
+      \u0448\u0430\u0440"
+    <Description>k__BackingField: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 \u0432\u044B\u0441\u043E\u043A\u0438\u0439
+      \u0443\u0440\u043E\u043D \u043E\u0433\u043D\u0435\u043C\n\u0421\u043D\u0438\u0436\u0430\u0435\u0442
+      \u0437\u0430\u0449\u0438\u0442\u0443 \u043E\u0442 \u043E\u0433\u043D\u044F
+      \u043D\u0430 3 \u0445\u043E\u0434\u0430"
+  <Id>k__BackingField: 
+  <ManaCost>k__BackingField:
+    <Type>k__BackingField: 3
+    baseValue: 15
+    minValue: 15
+    maxValue: 15
+  <CooldownSeconds>k__BackingField: 3
+  <Actions>k__BackingField:
+  - rid: 3242848249481003070
+  - rid: 3242848249481003071
+  references:
+    version: 2
+    RefIds:
+    - rid: 3242848249481003070
+      type: {class: HitEnemyAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
+      data:
+        damage: 20
+        ignoreDefenceScale: 0
+        bonusAttackParamName: 4
+        bonusDefenceParamName: 4
+    - rid: 3242848249481003071
+      type: {class: DecreaseParamAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
+      data:
+        decreaseScale: 0.8
+        duration: 5
+        bonusAttackParamName: 5
+        decreasingParam: 4

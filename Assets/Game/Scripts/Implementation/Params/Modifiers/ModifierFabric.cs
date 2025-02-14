@@ -3,11 +3,11 @@ using Core.Tools.Pool;
 
 namespace Implementation.Params.Modifiers
 {
-    public class SubtractModifierFabric : IPoolFabric<SubtractModifier>
+    public class ModifierFabric : IPoolFabric<SubtractModifier>, IPoolFabric<MultiplyModifier>
     {
         private IStepCounter _stepCounter;
 
-        public SubtractModifierFabric(IStepCounter stepCounter)
+        public ModifierFabric(IStepCounter stepCounter)
         {
             _stepCounter = stepCounter;
         }
@@ -15,6 +15,11 @@ namespace Implementation.Params.Modifiers
         public SubtractModifier CreateNew()
         {
             return new SubtractModifier(_stepCounter);
+        }
+
+        MultiplyModifier IPoolFabric<MultiplyModifier>.CreateNew()
+        {
+            return new MultiplyModifier(_stepCounter);
         }
     }
 }

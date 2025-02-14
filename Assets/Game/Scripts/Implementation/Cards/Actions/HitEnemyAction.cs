@@ -13,6 +13,9 @@ namespace Implementation.Cards.Actions
         private float damage;
 
         [SerializeField]
+        private float ignoreDefenceScale;
+
+        [SerializeField]
         private ParamType bonusAttackParamName;
 
         [SerializeField]
@@ -36,6 +39,7 @@ namespace Implementation.Cards.Actions
             {
                 foreach (var item in defense)
                 {
+                    var defence = Mathf.Max(1, item.ActualValue - item.ActualValue * ignoreDefenceScale);
                     if (item.ActualValue != 0)
                         scaledDamage /= item.ActualValue;
                 }

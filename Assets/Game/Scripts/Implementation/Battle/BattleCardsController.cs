@@ -92,6 +92,15 @@ namespace Implementation.Battle
             return pair.StartSwitching(totalTime);
         }
 
+        public bool CanPlayAnyCard(float mana)
+        {
+            foreach(var card in _currentDesk.Cards)
+            {
+                if(card.ManaCost.ActualValue != 0 && card.ManaCost.ActualValue <= mana)
+                    return true;
+            }
+            return false;
+        }
         public BaseCard GetCardByIndex(int cardIndex)
         {
             return _pairs[cardIndex].Main;

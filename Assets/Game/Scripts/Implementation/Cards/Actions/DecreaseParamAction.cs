@@ -11,7 +11,7 @@ namespace Implementation.Cards.Actions
     public class DecreaseParamAction : CardAction
     {
         [SerializeField]
-        private float decreaseCount;
+        private float decreaseScale;
 
         [SerializeField]
         private int duration;
@@ -26,7 +26,7 @@ namespace Implementation.Cards.Actions
         {
             var strength = player.GetParams(bonusAttackParamName);
             var decreasing = target.GetParams(decreasingParam)[0];
-            var scaledDamage = decreaseCount * timeBonus;
+            var scaledDamage = decreaseScale;
 
             if (strength != null && strength.Count > 0)
             {
@@ -36,7 +36,7 @@ namespace Implementation.Cards.Actions
                 }
             }
 
-            var modifier = ModifiersPool.Instance.GetSubtractModifier(duration, scaledDamage);
+            var modifier = ModifiersPool.Instance.GetMultiplyModifier(duration, scaledDamage);
             decreasing.ApplyModifier(modifier);
         }
     }

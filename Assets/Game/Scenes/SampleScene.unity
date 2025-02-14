@@ -1064,7 +1064,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 384.625, y: -206.655}
-  m_SizeDelta: {x: 769.25, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272680666
 MonoBehaviour:
@@ -1195,6 +1195,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 424957261}
     m_Modifications:
+    - target: {fileID: 3217699692452479499, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5538230048779499588, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1222,6 +1226,10 @@ PrefabInstance:
     - target: {fileID: 6191907207412728699, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_Name
       value: ActorViewReversed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952664341235121179, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8295980010306423447, guid: 5fcf47f79e700d049a518db12bf04761, type: 3}
       propertyPath: m_Pivot.x
@@ -2065,8 +2073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b308399be2d385c48981fd648443bfbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actors: {fileID: 11400000, guid: 38d43fc422aed1a4f8faf38e8ef00b15, type: 2}
-  desks: {fileID: 11400000, guid: 4bb2afff523d7b149b39190d4aac6e14, type: 2}
+  actors: {fileID: 11400000, guid: c39fdd9323c46d14eb7b3761326c8ec8, type: 2}
+  desks: {fileID: 11400000, guid: bf478fe3205c7ec4480aa0ddecd0cdcd, type: 2}
 --- !u!1001 &2261826357380209292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2181,6 +2189,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3440469867263535452, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387332464154763216, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086683800741896640, guid: b2b7db446717872419a1c51a0a81ccb6, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

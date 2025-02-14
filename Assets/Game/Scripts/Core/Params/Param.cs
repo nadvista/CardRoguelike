@@ -21,6 +21,9 @@ namespace Core.Params
 
         private float _foreverAdditionValue = 0;
 
+        public float Max => maxValue;
+        public float Min => minValue;
+
         public Param(float baseValue, float minValue, float maxValue)
         {
             this.baseValue = baseValue;

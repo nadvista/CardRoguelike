@@ -50,6 +50,7 @@ namespace Core.Params
         private void OnNewStep()
         {
             Duration--;
+            ProcessStep();
             if (Duration <= 0)
             {
                 OnModifierLate?.Invoke(this);
@@ -57,6 +58,7 @@ namespace Core.Params
             }
         }
 
+        protected virtual void ProcessStep() { }
         protected abstract float GetModifiedValue(float value);
     }
 }
