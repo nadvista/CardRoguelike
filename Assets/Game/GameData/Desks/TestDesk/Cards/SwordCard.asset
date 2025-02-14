@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: SwordCard
   m_EditorClassIdentifier: 
   <CardData>k__BackingField:
-    PreviewImage: {fileID: 21300000, guid: b2533d2dc8c229e4189ba69fb182fbf2, type: 3}
-    CardName: Sword
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <CardName>k__BackingField: "\u041C\u0435\u0447"
+    <Description>k__BackingField: "\u0421\u043B\u0430\u0431\u043E \u0445\u0440\u0435\u043D\u0430\u0447\u0438\u0442"
   <Id>k__BackingField: Sword
   <ManaCost>k__BackingField:
     <Type>k__BackingField: 3
     baseValue: 5
     minValue: 0
     maxValue: 50
-  <PlayDelay>k__BackingField: 1
+  <CooldownSeconds>k__BackingField: 1
   <Actions>k__BackingField:
   - rid: 3242848065976533048
   references:

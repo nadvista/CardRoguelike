@@ -16,19 +16,23 @@ namespace Ui.Params
         private Image _paramPreview;
 
         [SerializeField]
+        private TextMeshProUGUI _label;
+
+        [SerializeField]
         private TextMeshProUGUI _valueLabel;
 
-        private ParamsPreviews _previews;
+        private ParamsDatas _datas;
 
         [Inject]
-        private void Construct(ParamsPreviews previews)
+        private void Construct(ParamsDatas previews)
         {
-            _previews = previews;
+            _datas = previews;
         }
 
         protected override void OnSetup(Param data)
         {
-            _paramPreview.sprite = _previews.GetPreview(data.Type);
+            _paramPreview.sprite = _datas.GetPreview(data.Type);
+            _label.text = _datas.GetName(data.Type);
         }
 
         protected override void OnActivate()
@@ -45,7 +49,7 @@ namespace Ui.Params
 
         private void OnParamChange()
         {
-            _valueLabel.text = Data.ActualValue.ToString("F2");
+            _valueLabel.text = Data.ActualValue.ToString("F0");
         }
     }
 }

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: FireballCard
   m_EditorClassIdentifier: 
   <CardData>k__BackingField:
-    PreviewImage: {fileID: 21300000, guid: e5a0104f476c0044c8b4b17592570cad, type: 3}
-    CardName: Fireball
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <CardName>k__BackingField: "\u0424\u0430\u0439\u0440\u0431\u043E\u043B"
+    <Description>k__BackingField: "\u0425\u0440\u0435\u043D\u0430\u0447\u0438\u0442
+      \u043E\u0433\u043D\u0435\u043C"
   <Id>k__BackingField: Fireball
   <ManaCost>k__BackingField:
     <Type>k__BackingField: 3

@@ -3,13 +3,15 @@ using Core.Cards;
 using Core.ScoreCounting;
 using System;
 using System.Collections.Generic;
+using Ui.Hint;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Ui.Cards
 {
-    public class CardView : UIContainerElement<BaseCard>
+    public class CardView : UIContainerElement<BaseCard>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         private Image imagePreview;
@@ -22,11 +24,14 @@ namespace Ui.Cards
 
         private List<CardUiComponent> _components = new List<CardUiComponent>();
 
+        private HintView _hints;
+
         [Inject]
-        private void Construct(ICardsCooldownProvider cooldownProvider, IBattleProvider battleProvider)
+        private void Construct(ICardsCooldownProvider cooldownProvider, IBattleProvider battleProvider, HintView hints)
         {
             var cdComponent = new CardCdView(cooldownProvider, imageCdFill);
             var playView = new CardOnPlayView(battleProvider, imageCantPlayIndicator);
+            _hints = hints;
 
             _components.Add(playView);
             _components.Add(cdComponent);
@@ -48,6 +53,18 @@ namespace Ui.Cards
         {
             foreach (var component in _components)
                 component.Dispose();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if(Data == null) 
+                return;
+            _hints.Show(Data.CardData.Description);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _hints.Hide();
         }
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine;
 namespace UI
 {
     [Serializable]
-    public class ParamPreviewData
+    public class ParamData
     {
         public Sprite Sprite;
         public ParamType ParamType;
+        public string Name;
     }
 }

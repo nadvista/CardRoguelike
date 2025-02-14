@@ -7,9 +7,12 @@ namespace Core.Cards
     public struct CardData
     {
         [field: SerializeField]
-        public Sprite PreviewImage;
+        public Sprite PreviewImage { get; private set; }
 
         [field: SerializeField]
-        public string CardName;
+        public string CardName { get; private set; }
+
+        [field: SerializeField]
+        public string Description { get; private set; }
     }
 }

@@ -9,17 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9112dcfea483b4a429d16a420067edc4, type: 3}
+  m_Script: {fileID: 11500000, guid: 925505443aa2e14419dd6935129b4990, type: 3}
   m_Name: Params
   m_EditorClassIdentifier: 
-  <ParamsPreviewData>k__BackingField:
-  - Sprite: {fileID: 21300000, guid: 3842bcb325a147749b230d48aa86c4ab, type: 3}
-    ParamType: 3
-  - Sprite: {fileID: 21300000, guid: c53a4b38473a43e458877603af45ea1a, type: 3}
-    ParamType: 2
-  - Sprite: {fileID: 21300000, guid: 0e596bf85c994b5439afb7718de388fc, type: 3}
-    ParamType: 1
-  - Sprite: {fileID: 21300000, guid: 1436f9a2cca825548abc2da054d0ccba, type: 3}
+  <Datas>k__BackingField:
+  - Sprite: {fileID: 0}
     ParamType: 0
-  - Sprite: {fileID: 21300000, guid: e5a0104f476c0044c8b4b17592570cad, type: 3}
+    Name: "\u0410\u0442\u0430\u043A\u0430"
+  - Sprite: {fileID: 0}
+    ParamType: 1
+    Name: "\u0417\u0430\u0449\u0438\u0442\u0430"
+  - Sprite: {fileID: 0}
+    ParamType: 2
+    Name: "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+  - Sprite: {fileID: 0}
+    ParamType: 3
+    Name: "\u041C\u0430\u043D\u0430"
+  - Sprite: {fileID: 0}
     ParamType: 4
+    Name: "\u041E\u0433\u043E\u043D\u044C"

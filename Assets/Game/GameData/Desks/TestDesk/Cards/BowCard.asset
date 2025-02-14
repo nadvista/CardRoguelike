@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: BowCard
   m_EditorClassIdentifier: 
   <CardData>k__BackingField:
-    PreviewImage: {fileID: 21300000, guid: 11972da750daf9b4f9897f567dd23979, type: 3}
-    CardName: Bow
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <CardName>k__BackingField: "\u041B\u0443\u043A"
+    <Description>k__BackingField: "\u0416\u0435\u0441\u0442\u043A\u043E \u0445\u0440\u0435\u043D\u0430\u0447\u0438\u0442"
   <Id>k__BackingField: Bow
   <ManaCost>k__BackingField:
     <Type>k__BackingField: 3
     baseValue: 10
     minValue: 0
     maxValue: 50
-  <PlayDelay>k__BackingField: 2
+  <CooldownSeconds>k__BackingField: 1
   <Actions>k__BackingField:
   - rid: 3242848111473983990
   references:
