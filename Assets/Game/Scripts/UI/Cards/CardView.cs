@@ -57,7 +57,8 @@ namespace Ui.Cards
         {
             if (Data == null)
                 return;
-            _hints.Show(Data.CardData.Description);
+            var fullTet = $"Стоимость: {Data.ManaCost.ActualValue}\n{Data.CardData.Description}";
+            _hints.Show(fullTet);
         }
 
         public void OnPointerExit(PointerEventData eventData)

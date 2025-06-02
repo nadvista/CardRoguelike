@@ -21,10 +21,10 @@ MonoBehaviour:
   <Id>k__BackingField: 
   <ManaCost>k__BackingField:
     <Type>k__BackingField: 3
-    baseValue: 7
-    minValue: 7
-    maxValue: 7
-  <CooldownSeconds>k__BackingField: 1
+    baseValue: 15
+    minValue: 15
+    maxValue: 15
+  <CooldownSeconds>k__BackingField: 0.5
   <Actions>k__BackingField:
   - rid: 3242848249481003069
   references:
@@ -36,4 +36,4 @@ MonoBehaviour:
         damage: 5
         ignoreDefenceScale: 0.5
         bonusAttackParamName: 0
-        bonusDefenceParamName: 1
+        bonusDefenceParamName: 7

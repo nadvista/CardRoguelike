@@ -10,6 +10,8 @@ namespace Core.Actors
     [Serializable]
     public class GameActor : IDisposable, IInitializable
     {
+        #region Properties
+
         [field: SerializeField]
         public ActorData Data { get; private set; }
 
@@ -19,9 +21,17 @@ namespace Core.Actors
         [field: SerializeField]
         public List<Param> AllParams { get; private set; }
 
+        #endregion
+
+        #region Events
+
         public event Action OnDead;
 
-        public virtual void Initialize()
+        #endregion
+
+        #region Public Methods
+
+        public void Initialize()
         {
             HealthParam.OnValueChange += OnHealthChange;
 
@@ -29,7 +39,7 @@ namespace Core.Actors
             OnInitialize();
         }
 
-        public virtual void Reset()
+        public void Reset()
         {
             foreach (var param in AllParams)
                 param.Reset();
@@ -44,10 +54,14 @@ namespace Core.Actors
             HealthParam.OnValueChange -= OnHealthChange;
         }
 
-        public List<Param> GetParams(ParamType paramType)
+        public IEnumerable<Param> GetParams(ParamType paramType)
         {
-            return AllParams.Where(e => e.Type == paramType).ToList();
+            return AllParams.Where(e => e.Type == paramType);
         }
+
+        #endregion
+
+        #region Protected Methods 
 
         protected virtual void OnInitialize() { }
         protected virtual void OnReset() { }
@@ -56,5 +70,7 @@ namespace Core.Actors
             if (HealthParam.ActualValue <= 0)
                 OnDead?.Invoke();
         }
+
+        #endregion
     }
 }

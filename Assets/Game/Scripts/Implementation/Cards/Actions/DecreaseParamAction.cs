@@ -3,6 +3,7 @@ using Core.Cards.Actions;
 using Core.Params;
 using Implementation.Params.Modifiers;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Implementation.Cards.Actions
@@ -24,8 +25,8 @@ namespace Implementation.Cards.Actions
 
         public override void DoAction(GameActor player, GameActor target, float timeBonus = 1)
         {
-            var strength = player.GetParams(bonusAttackParamName);
-            var decreasing = target.GetParams(decreasingParam)[0];
+            var strength = player.GetParams(bonusAttackParamName).ToList();
+            var decreasing = target.GetParams(decreasingParam).ToList()[0];
             var scaledDamage = decreaseScale;
 
             if (strength != null && strength.Count > 0)

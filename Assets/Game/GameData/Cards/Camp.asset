@@ -26,11 +26,11 @@ MonoBehaviour:
     maxValue: 0
   <CooldownSeconds>k__BackingField: 0.1
   <Actions>k__BackingField:
-  - rid: 3242848249481003075
+  - rid: 3242848249481003076
   references:
     version: 2
     RefIds:
-    - rid: 3242848249481003075
+    - rid: 3242848249481003076
       type: {class: HealEnemyAction, ns: Implementation.Cards.Actions, asm: ImplementationAssembly}
       data:
-        healPoints: 2
+        healPoints: 10

@@ -2,6 +2,7 @@
 using Core.Cards.Actions;
 using Core.Params;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Implementation.Cards.Actions
@@ -23,25 +24,44 @@ namespace Implementation.Cards.Actions
 
         public override void DoAction(GameActor player, GameActor target, float timeBonus = 1)
         {
-            var strength = player.GetParams(bonusAttackParamName);
-            var defense = target.GetParams(bonusDefenceParamName);
+            var strength = player.GetParams(bonusAttackParamName).ToList();
+            var defenseElemential = target.GetParams(bonusDefenceParamName).ToList();
+
+            var defenceBase = target.GetParams(ParamType.Defence).ToList();
+
             var scaledDamage = damage * timeBonus;
 
             if (strength != null && strength.Count > 0)
             {
                 foreach (var item in strength)
                 {
+                    if (item.ActualValue <= 1)
+                        continue;
                     scaledDamage *= item.ActualValue;
                 }
             }
 
-            if (defense != null && defense.Count > 0)
+            if (defenseElemential != null && defenseElemential.Count > 0)
             {
-                foreach (var item in defense)
+                foreach (var item in defenseElemential)
                 {
-                    var defence = Mathf.Max(1, item.ActualValue - item.ActualValue * ignoreDefenceScale);
-                    if (item.ActualValue != 0)
-                        scaledDamage /= item.ActualValue;
+                    if (item.Type == ParamType.Defence)
+                        continue;
+                    if (item.ActualValue <= 1)
+                        continue;
+                    scaledDamage /= item.ActualValue;
+                }
+            }
+
+            if (defenceBase != null && defenceBase.Count > 0)
+            {
+                foreach (var item in defenceBase)
+                {
+                    if (item.ActualValue <= 1)
+                        continue;
+                    var defence = item.ActualValue - item.ActualValue * ignoreDefenceScale;
+                    defence = Mathf.Max(defence, 1);
+                    scaledDamage /= defence;
                 }
             }
 

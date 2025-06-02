@@ -28,3 +28,9 @@ MonoBehaviour:
   - Sprite: {fileID: 0}
     ParamType: 4
     Name: "\u041E\u0433\u043E\u043D\u044C"
+  - Sprite: {fileID: 0}
+    ParamType: 5
+    Name: "\u042F\u0434"
+  - Sprite: {fileID: 0}
+    ParamType: 6
+    Name: "\u041C\u043E\u043B\u043D\u0438\u044F"
