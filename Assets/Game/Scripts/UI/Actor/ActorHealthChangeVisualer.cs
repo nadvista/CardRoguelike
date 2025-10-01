@@ -30,18 +30,20 @@ namespace Ui.Actors
 
         private Coroutine _showIndicatorCoroutine;
 
-        private IBattleProvider _battleProvider;
+        private IBattlePrepareController _battlePrepare;
+        private IBattleStopController _battleStop;
 
         [Inject]
-        private void Construct(IBattleProvider battleProvider)
+        private void Construct(IBattlePrepareController battlePrepare, IBattleStopController battleStop)
         {
-            _battleProvider = battleProvider;
+            _battlePrepare = battlePrepare;
+            _battleStop = battleStop;
         }
 
         private void Awake()
         {
-            _battleProvider.OnBattlePrepared += OnBattlePrepare;
-            _battleProvider.OnBattleEnd += OnBattleEnd;
+            _battlePrepare.OnBattlePrepared += OnBattlePrepare;
+            _battleStop.OnBattleEnd += OnBattleEnd;
         }
         private void Start()
         {
@@ -51,8 +53,8 @@ namespace Ui.Actors
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattlePrepared -= OnBattlePrepare;
-            _battleProvider.OnBattleEnd -= OnBattleEnd;
+            _battlePrepare.OnBattlePrepared -= OnBattlePrepare;
+            _battleStop.OnBattleEnd -= OnBattleEnd;
 
             ResetActor();
         }

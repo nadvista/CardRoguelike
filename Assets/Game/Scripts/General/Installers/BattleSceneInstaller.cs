@@ -45,6 +45,5 @@ namespace General.Installers
             Container.BindInterfacesAndSelfTo<CardsCooldownProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleProvider>().AsSingle();
         }
-
     }
 }

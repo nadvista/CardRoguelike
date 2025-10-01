@@ -12,7 +12,7 @@ using System;
 
 namespace Implementation.Battle
 {
-    public class BattleProvider : IBattleProvider, IDisposable
+    public class BattleProvider : IBattleCardsController, IBattleActorsProvider, IBattlePrepareController, IBattleStartController, IBattleStopController, IDisposable
     {
         private const float TOTAL_CARDS_SWITCHING_TIME = 0.3f;
 
@@ -39,7 +39,7 @@ namespace Implementation.Battle
         public GameEnemy CurrentEnemy { get; private set; }
         public CardsDesk CurrentCardsDesk { get; private set; }
 
-        public float TimeFromLastStepSeconds => _gameTimer.CurrentTimeSeconds;
+        public float TimeFromLastCard => _gameTimer.CurrentTimeSeconds;
 
         public Param PlayerMana => CurrentPlayer.HealthParam;
 

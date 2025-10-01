@@ -29,20 +29,20 @@ namespace Ui.Actors
         [SerializeField]
         private List<TextMeshProUGUI> _hitIndicators;
 
-        private IBattleProvider _battleProvider;
+        private IBattlePrepareController _battlePrepare;
 
         [Inject]
-        private void Construct(IBattleProvider battleProvider, TimersPool timers)
+        private void Construct(IBattlePrepareController battlePrepare, TimersPool timers)
         {
-            _battleProvider = battleProvider;
+            _battlePrepare = battlePrepare;
         }
         private void Awake()
         {
-            _battleProvider.OnBattlePrepared += OnNewBattle;
+            _battlePrepare.OnBattlePrepared += OnNewBattle;
         }
         private void OnDestroy()
         {
-            _battleProvider.OnBattlePrepared -= OnNewBattle;
+            _battlePrepare.OnBattlePrepared -= OnNewBattle;
         }
 
         private void OnNewBattle(GameActor actor1, GameActor actor2, CardsDesk desk)

@@ -25,10 +25,10 @@ namespace Ui.Cards
         private HintView _hints;
 
         [Inject]
-        private void Construct(ICardsCooldownProvider cooldownProvider, IBattleProvider battleProvider, HintView hints)
+        private void Construct(ICardsCooldownProvider cooldownProvider, IBattleCardsController battleCardsController, HintView hints)
         {
             var cdComponent = new CardCdView(cooldownProvider, imageCdFill);
-            var playView = new CardOnPlayView(battleProvider, imageCantPlayIndicator);
+            var playView = new CardOnPlayView(battleCardsController, imageCantPlayIndicator);
             _hints = hints;
 
             _components.Add(playView);

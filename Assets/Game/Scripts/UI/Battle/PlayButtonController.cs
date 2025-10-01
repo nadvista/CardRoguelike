@@ -13,41 +13,48 @@ namespace UI
         [SerializeField]
         private Button button;
 
-        private IBattleProvider _battle;
+        private IBattleStartController _battleStart;
+        private IBattlePrepareController _battlePrepare;
+        private IBattleStopController _battleStop;
 
         [Inject]
-        private void Construct(IBattleProvider battle)
+        private void Construct(IBattleStartController battleStart, IBattlePrepareController battlePrepare, IBattleStopController battleStop)
         {
-            _battle = battle;
+            _battleStart = battleStart;
+            _battlePrepare = battlePrepare;
+            _battleStop = battleStop;
         }
 
         private void Awake()
         {
             gameObject.SetActive(false);
+
             button.onClick.AddListener(OnButtonClicked);
-            _battle.OnBattlePrepared += OnBattlePrepare;
-            _battle.OnBattleEnd += OnBattleEnd;
+
+            _battlePrepare.OnBattlePrepared += OnBattlePrepare;
+            _battleStop.OnBattleEnd += OnBattleEnd;
         }
 
         private void OnDestroy()
         {
             button.onClick.RemoveListener(OnButtonClicked);
-            _battle.OnBattlePrepared -= OnBattlePrepare;
-            _battle.OnBattleEnd -= OnBattleEnd;
+
+            _battlePrepare.OnBattlePrepared -= OnBattlePrepare;
+            _battleStop.OnBattleEnd -= OnBattleEnd;
         }
 
         private void OnButtonClicked()
         {
-            if (_battle.IsBattleStarted)
+            if (_battleStart.IsBattleStarted)
                 return;
 
-            if (!_battle.IsBattlePrepared)
+            if (!_battlePrepare.IsBattlePrepared)
             {
-                _battle.PrepareBattle();
+                _battlePrepare.PrepareBattle();
                 return;
             }
 
-            _battle.StartBattle();
+            _battleStart.StartBattle();
             gameObject.SetActive(false);
         }
 

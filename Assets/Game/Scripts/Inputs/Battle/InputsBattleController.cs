@@ -6,12 +6,12 @@ namespace Inputs.Battle
 {
     public class InputsBattleController : IDisposable
     {
-        private IBattleProvider _battleProvider;
+        private IBattleCardsController _battleCards;
         private GameplaySimpleInputsHandler _gameplaySimpleInputsHandler;
 
-        public InputsBattleController(IBattleProvider battleProvider, GameplaySimpleInputsHandler gameplaySimpleInputsHandler)
+        public InputsBattleController(IBattleCardsController battleCards, GameplaySimpleInputsHandler gameplaySimpleInputsHandler)
         {
-            _battleProvider = battleProvider;
+            _battleCards = battleCards;
             _gameplaySimpleInputsHandler = gameplaySimpleInputsHandler;
 
             _gameplaySimpleInputsHandler.OnPlayPerformed += OnPlayPerformed;
@@ -21,13 +21,13 @@ namespace Inputs.Battle
         private void OnSwitchPerformed(int obj)
         {
             var switchIndex = obj - 1;
-            _battleProvider.SwitchCardsPair(switchIndex);
+            _battleCards.SwitchCardsPair(switchIndex);
         }
 
         private void OnPlayPerformed(int obj)
         {
             var cardIndex = obj - 1;
-            _battleProvider.PlayBattleCard(cardIndex);
+            _battleCards.PlayBattleCard(cardIndex);
         }
 
         public void Dispose()

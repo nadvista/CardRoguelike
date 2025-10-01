@@ -12,29 +12,33 @@ namespace Ui.Cards
         [SerializeField]
         private List<CardsPairContainer> pairContainers;
 
-        private IBattleProvider _battleProvider;
+        private IBattleStopController _battleStop;
+        private IBattlePrepareController _battlePrepare;
+        private IBattleCardsController _battleCards;
 
         private bool _isBattleStarted;
 
         [Inject]
-        private void Construct(IBattleProvider battle)
+        private void Construct(IBattleStopController battleStop, IBattlePrepareController battlePrepare, IBattleCardsController battleCards)
         {
-            _battleProvider = battle;
+            _battleStop = battleStop;
+            _battlePrepare = battlePrepare;
+            _battleCards = battleCards;
         }
         private void Awake()
         {
-            _battleProvider.OnBattlePrepared += OnBattleStart;
-            _battleProvider.OnBattleEnd += OnBattleEnd;
+            _battlePrepare.OnBattlePrepared += OnBattleStart;
+            _battleStop.OnBattleEnd += OnBattleEnd;
 
-            _battleProvider.OnCardSwitchingStarted += OnSwitchPerformed;
+            _battleCards.OnCardSwitchingStarted += OnSwitchPerformed;
         }
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattlePrepared -= OnBattleStart;
-            _battleProvider.OnBattleEnd -= OnBattleEnd;
+            _battlePrepare.OnBattlePrepared -= OnBattleStart;
+            _battleStop.OnBattleEnd -= OnBattleEnd;
 
-            _battleProvider.OnCardSwitchingStarted -= OnSwitchPerformed;
+            _battleCards.OnCardSwitchingStarted -= OnSwitchPerformed;
         }
 
         private void OnSwitchPerformed(int obj, float time)

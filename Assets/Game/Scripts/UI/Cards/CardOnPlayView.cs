@@ -9,7 +9,7 @@ namespace Ui.Cards
     public class CardOnPlayView : CardUiComponent
     {
         private Image _imageIndicator;
-        private IBattleProvider _battleProvider;
+        private IBattleCardsController _battleCards;
 
         private Sequence _animationSequence;
 
@@ -17,10 +17,10 @@ namespace Ui.Cards
         private Color _indicateColor;
         const float TOTAL_ANIMATION_TIME = 0.3f;
 
-        public CardOnPlayView(IBattleProvider battleProvider, Image indicatorImage)
+        public CardOnPlayView(IBattleCardsController battleCards, Image indicatorImage)
         {
             _imageIndicator = indicatorImage;
-            _battleProvider = battleProvider;
+            _battleCards = battleCards;
 
             _stdColor = indicatorImage.color;
             _indicateColor = Color.red;
@@ -28,13 +28,13 @@ namespace Ui.Cards
 
         public override void Start()
         {
-            _battleProvider.OnPlayCard += OnPlayAnyCard;
+            _battleCards.OnPlayCard += OnPlayAnyCard;
             _imageIndicator.gameObject.SetActive(false);
         }
 
         public override void Dispose()
         {
-            _battleProvider.OnPlayCard -= OnPlayAnyCard;
+            _battleCards.OnPlayCard -= OnPlayAnyCard;
             if (_animationSequence != null)
                 _animationSequence.onComplete -= OnAnimationComplete;
         }

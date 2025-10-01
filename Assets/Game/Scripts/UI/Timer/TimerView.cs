@@ -12,14 +12,19 @@ namespace Ui.Params
         private Image imageTimerFill;
 
         private IScoreCounter _scoreCounter;
-        private IBattleProvider _battleProvider;
+        private IBattleStartController _battleStart;
+        private IBattleStopController _battleStop;
+        private IBattleCardsController _battleCards;
 
         private bool _isWorking;
 
         [Inject]
-        private void Construct(IBattleProvider battleProvider, IScoreCounter scoreCounter)
+        private void Construct(IBattleStartController battleStart, IBattleStopController battleStop, IBattleCardsController battleCards, IScoreCounter scoreCounter)
         {
-            _battleProvider = battleProvider;
+            _battleStart = battleStart;
+            _battleStop = battleStop;
+            _battleCards = battleCards;
+
             _scoreCounter = scoreCounter;
         }
 
@@ -27,14 +32,14 @@ namespace Ui.Params
         {
             imageTimerFill.type = Image.Type.Filled;
 
-            _battleProvider.OnBattleStarted += OnBattleStart;
-            _battleProvider.OnBattleEnd += OnBattleEnd;
+            _battleStart.OnBattleStarted += OnBattleStart;
+            _battleStop.OnBattleEnd += OnBattleEnd;
         }
 
         private void OnDestroy()
         {
-            _battleProvider.OnBattleStarted -= OnBattleStart;
-            _battleProvider.OnBattleEnd -= OnBattleEnd;
+            _battleStart.OnBattleStarted -= OnBattleStart;
+            _battleStop.OnBattleEnd -= OnBattleEnd;
         }
 
         private void Update()
@@ -42,7 +47,7 @@ namespace Ui.Params
             if (!_isWorking)
                 return;
 
-            var fillAmount = (_scoreCounter.BonusTimeSeconds - _battleProvider.TimeFromLastStepSeconds) / _scoreCounter.BonusTimeSeconds;
+            var fillAmount = (_scoreCounter.BonusTimeSeconds - _battleCards.TimeFromLastCard) / _scoreCounter.BonusTimeSeconds;
             imageTimerFill.fillAmount = fillAmount;
         }
 

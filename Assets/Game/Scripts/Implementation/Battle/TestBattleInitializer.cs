@@ -6,12 +6,12 @@ namespace Implementation.Battle
 {
     public class TestBattleInitializer : MonoBehaviour
     {
-        private IBattleProvider _battle;
+        private IBattlePrepareController _battle;
 
         [Inject]
-        private void Construct(IBattleProvider battle)
+        private void Construct(IBattlePrepareController battlePrepare)
         {
-            _battle = battle;
+            _battle = battlePrepare;
         }
 
         private void Start()
